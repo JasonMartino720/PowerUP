@@ -1,17 +1,28 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package org.usfirst.frc.team5030.robot;
 
-/**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
+//Import all commands for binding
+import org.usfirst.frc.team5030.robot.commands.*;
+//Import all subsytems
+import org.usfirst.frc.team5030.robot.subsystems.*;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.Joystick;
+
+
 public class OI 
 {
+	
+	//Instantiate, create, and name Driver Joystick
+	public static Joystick driver = new Joystick(0);
+		public JoystickButton rbbutton = new JoystickButton(driver, 6);
+	
+	//Instantiate, create, and name Operator Joystick
+	public static Joystick operator = new Joystick(1);
+		public JoystickButton intake = new JoystickButton(operator, 6);
+		
+
+	public OI()
+	{
+		
+	}
 	
 }
