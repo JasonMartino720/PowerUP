@@ -17,7 +17,9 @@ public class OI
 	
 	//Instantiate, create, and name Operator Joystick
 	public static Joystick operator = new Joystick(1);
-		public JoystickButton intake = new JoystickButton(operator, 6);
+		public JoystickButton intakeIn = new JoystickButton(operator, 6); //RB		
+		public JoystickButton intakeOut = new JoystickButton(operator, 5);//LB
+		public JoystickButton climb = new JoystickButton(operator, 2); //X
 		
 
 	public OI()

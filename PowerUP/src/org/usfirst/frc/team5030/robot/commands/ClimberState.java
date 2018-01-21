@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AUTO_Default extends Command {
+public class ClimberState extends Command {
 
-    public AUTO_Default() {
+    public ClimberState() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrainSubsystem);
+        requires(Robot.climberSubsytem);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +20,14 @@ public class AUTO_Default extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrainSubsystem.UserDrive(0, 0);
+    	if(Robot.oi.climb.get())
+    	{
+    		Robot.climberSubsytem.Climb();
+    	}
+    	else
+    	{
+    		Robot.climberSubsytem.ClimberOff();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,10 +37,12 @@ public class AUTO_Default extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.climberSubsytem.ClimberOff();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

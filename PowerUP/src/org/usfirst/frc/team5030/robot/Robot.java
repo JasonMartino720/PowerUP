@@ -15,6 +15,8 @@ public class Robot extends TimedRobot {
 	public static RobotMap robotmap;
 	public static Intake intakeSubsytem;
 	public static Drivetrain drivetrainSubsystem;
+	public static Climber climberSubsytem;
+	public static Elevator elevatorSubsystem;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -26,6 +28,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		robotmap = new RobotMap();
+		intakeSubsytem = new Intake();
+		drivetrainSubsystem = new Drivetrain();
+		climberSubsytem = new Climber();
+		elevatorSubsystem = new Elevator();
 		chooser.addDefault("Default Auto", new AUTO_Default());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);

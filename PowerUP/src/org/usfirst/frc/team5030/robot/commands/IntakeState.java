@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AUTO_Default extends Command {
+public class IntakeState extends Command {
 
-    public AUTO_Default() {
+    public IntakeState() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrainSubsystem);
+        requires(Robot.intakeSubsytem);
     }
 
     // Called just before this Command runs the first time
@@ -19,21 +19,36 @@ public class AUTO_Default extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.drivetrainSubsystem.UserDrive(0, 0);
+    protected void execute() 
+    {
+    	if(Robot.oi.intakeIn.get())
+    	{
+    		Robot.intakeSubsytem.IntakeIn();
+    	}
+    	else if(Robot.oi.intakeOut.get())
+    	{
+    		Robot.intakeSubsytem.IntakeOut();
+    	}
+    	else
+    	{
+    		Robot.intakeSubsytem.IntakeOff();
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !Robot.oi.intakeIn.get();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.intakeSubsytem.IntakeOff();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	this.end();
     }
 }

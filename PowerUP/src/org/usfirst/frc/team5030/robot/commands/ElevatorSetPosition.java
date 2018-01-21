@@ -7,11 +7,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AUTO_Default extends Command {
+public class ElevatorSetPosition extends Command {
 
-    public AUTO_Default() {
+	//Variable to store operator DPad value
+	private int operatorPOV;
+	
+    public ElevatorSetPosition() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrainSubsystem);
+        requires(Robot.elevatorSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -20,12 +23,24 @@ public class AUTO_Default extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrainSubsystem.UserDrive(0, 0);
+    	//Get POV from operator and send it to chooseHallEffect method
+    	operatorPOV = Robot.oi.operator.getPOV();
+    	
+    	Robot.elevatorSubsystem.chooseHallEffect(operatorPOV);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	
+    	//Kill command when POV = -1 ie. Not Pressed
+        if(operatorPOV == -1)
+    	{
+        	return true;
+    	}
+        else
+        {
+        	return false;
+        }
     }
 
     // Called once after isFinished returns true

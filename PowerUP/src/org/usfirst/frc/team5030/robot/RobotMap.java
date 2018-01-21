@@ -2,7 +2,7 @@ package org.usfirst.frc.team5030.robot;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.VictorSP;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class RobotMap 
@@ -30,6 +30,12 @@ public class RobotMap
 	
 	//Instantiate VictorSP and assign PWM Port
 	public VictorSP climber = new VictorSP(2);
+	
+	//Instantiate Hall Effect Sensors and assign PWM
+	public DigitalInput switchHeight = new DigitalInput(7);	
+	public DigitalInput scaleHeight = new DigitalInput(8);
+	public DigitalInput maxHeight = new DigitalInput(9);
+	
 	
 	public RobotMap()
 	{

@@ -1,17 +1,15 @@
 package org.usfirst.frc.team5030.robot.commands;
 
 import org.usfirst.frc.team5030.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class AUTO_Default extends Command {
+public class ElevatorOperation extends Command {
 
-    public AUTO_Default() {
+	private double speed;
+	
+    public ElevatorOperation() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrainSubsystem);
+        requires(Robot.elevatorSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -19,8 +17,11 @@ public class AUTO_Default extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.drivetrainSubsystem.UserDrive(0, 0);
+    protected void execute() 
+    {
+    	this.speed = Robot.oi.operator.getY();
+    	
+    	Robot.elevatorSubsystem.operatorControl(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

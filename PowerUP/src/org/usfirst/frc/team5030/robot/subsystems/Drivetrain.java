@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
+//TODO Test all motors and decide inverts
+//TODO figureo out appropriate deadband
 public class Drivetrain extends Subsystem 
 {
 
