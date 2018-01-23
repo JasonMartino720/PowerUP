@@ -57,12 +57,6 @@ public class Intake extends Subsystem {
     	this.Gripper_Group.set(-0.75);
     }
     
-    //Same as above but higher velocity
-    public void ShootCube()
-    {
-    	this.Gripper_Group.set(-1.0);
-    }
-    
     public void intakeStartPosition()
     {
     	Robot.robotmap.intakeSolenoid.set(DoubleSolenoid.Value.kForward);

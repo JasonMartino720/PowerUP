@@ -21,13 +21,17 @@ public class IntakeState extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() 
     {
-    	if(Robot.oi.intakeIn.get())
+    	if(Robot.oi.IntakeIn.get())
     	{
     		Robot.intakeSubsytem.IntakeIn();
     	}
-    	else if(Robot.oi.intakeOut.get())
+    	else if(Robot.oi.IntakeOut.get())
     	{
     		Robot.intakeSubsytem.IntakeOut();
+    	}
+    	else if(Robot.oi.placeCube.get())
+    	{
+    		Robot.intakeSubsytem.PlaceCube();
     	}
     	else
     	{
@@ -38,7 +42,7 @@ public class IntakeState extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.oi.intakeIn.get();
+        return !Robot.oi.IntakeIn.get();
     }
 
     // Called once after isFinished returns true
