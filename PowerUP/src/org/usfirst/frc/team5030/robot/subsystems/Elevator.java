@@ -38,6 +38,7 @@ public class Elevator extends Subsystem {
 				
 				case 1:
 				decidedPosition = Robot.robotmap.scaleHeight.get();
+				this.elevatorToPosition(decidedPosition);
 				break; 
 			}
 		}

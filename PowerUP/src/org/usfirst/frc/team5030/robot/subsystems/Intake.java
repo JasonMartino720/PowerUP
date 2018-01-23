@@ -2,6 +2,8 @@ package org.usfirst.frc.team5030.robot.subsystems;
 
 import org.usfirst.frc.team5030.robot.Robot;
 import org.usfirst.frc.team5030.robot.commands.*;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -23,7 +25,7 @@ public class Intake extends Subsystem {
 		//Invert One of the gripper motors
 		Robot.robotmap.rightGripper.setInverted(true);
 		Robot.robotmap.rightCompliantArm.setInverted(true);
-	}
+	} 
 	
 	//Turn off both SpeedControllerGroups
     public void IntakeOff()
@@ -61,6 +63,15 @@ public class Intake extends Subsystem {
     	this.Gripper_Group.set(-1.0);
     }
     
+    public void intakeStartPosition()
+    {
+    	Robot.robotmap.intakeSolenoid.set(DoubleSolenoid.Value.kForward);
+    }
+    
+    public void intakeOutPosition()
+    {
+    	Robot.robotmap.intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
+    }
  
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

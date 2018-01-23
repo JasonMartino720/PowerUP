@@ -3,7 +3,9 @@ package org.usfirst.frc.team5030.robot;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 
 public class RobotMap 
 {
@@ -30,6 +32,11 @@ public class RobotMap
 	
 	//Instantiate VictorSP and assign PWM Port
 	public VictorSP climber = new VictorSP(2);
+	
+	//Instantiate and Assign Double Solenoid
+	public DoubleSolenoid intakeSolenoid = new DoubleSolenoid(0,1);
+	
+	public DoubleSolenoid climberReleaseSolenoid = new DoubleSolenoid(2,3);
 	
 	//Instantiate Hall Effect Sensors and assign PWM
 	public DigitalInput switchHeight = new DigitalInput(7);	
