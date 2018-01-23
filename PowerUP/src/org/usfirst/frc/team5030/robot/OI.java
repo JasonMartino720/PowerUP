@@ -4,6 +4,8 @@ package org.usfirst.frc.team5030.robot;
 import org.usfirst.frc.team5030.robot.commands.*;
 //Import all subsytems
 import org.usfirst.frc.team5030.robot.subsystems.*;
+
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -20,10 +22,29 @@ public class OI
 		public JoystickButton intakeIn = new JoystickButton(operator, 6); //RB		
 		public JoystickButton intakeOut = new JoystickButton(operator, 5);//LB
 		public JoystickButton climb = new JoystickButton(operator, 2); //X
+		public Button operatorPOVLeft = new DPad(operator, 270); //Left on the DPad used for Scale
+		public Button operatorPOVRight = new DPad(operator, 90);
+		
 		
 
 	public OI()
 	{
+		//Intake Binding
+		intakeIn.whileHeld(new IntakeState());
+		intakeIn.whenPressed(new IntakeOff());
+		intakeOut.whileHeld(new IntakeState());
+		intakeOut.whenPressed(new IntakeOff());
+		
+		
+		//DPAD Binding for Elevator
+		operatorPOVLeft.whileHeld(new ElevatorSetPosition());
+		operatorPOVRight.whileHeld(new ElevatorSetPosition());
+
+		//Climber Binding
+		climb.whileHeld(new ClimberState());
+		climb.whenReleased(new ClimberOff());
+		
+		//
 		
 	}
 	
