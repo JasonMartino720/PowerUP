@@ -2,6 +2,8 @@ package org.usfirst.frc.team5030.robot.commands;
 
 import org.usfirst.frc.team5030.robot.Robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -21,6 +23,8 @@ public class JoystickOperation extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.robotmap.FL.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
+    	Robot.robotmap.FR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
     
     	
     }
@@ -33,6 +37,16 @@ public class JoystickOperation extends Command {
     	
     	//pass values back to UserDrive Method of Drivetrian subsystem
     	Robot.drivetrainSubsystem.UserDrive(throttle, rotation);
+    	
+    	if(Robot.oi.rbbutton.get())
+    	{
+    		Robot.robotmap.FR.getSensorCollection().setQuadraturePosition(0, 5);
+    		Robot.robotmap.FL.getSensorCollection().setQuadraturePosition(0, 5);
+    		
+    	}
+    	
+    	System.out.println("Right Enc " + Robot.robotmap.FR.getSelectedSensorPosition(1/256));
+		System.out.println("Left Enc " + Robot.robotmap.FL.getSelectedSensorPosition(1/256));
     }
 
     // Make this return true when this Command no longer needs to run execute()

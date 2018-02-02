@@ -9,8 +9,8 @@ public class ClimbingConfigGroup extends CommandGroup {
 
     public ClimbingConfigGroup() {
   
-    	addParallel(new DeployClimbingRamps);
+    	/*addParallel(new DeployClimbingRamps);
     	addParallel(new DeployClimbingWheels);
-    	
+    	*/
     }
 }

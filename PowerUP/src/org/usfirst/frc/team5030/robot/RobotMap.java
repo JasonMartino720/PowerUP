@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 
 public class RobotMap 
@@ -24,6 +25,8 @@ public class RobotMap
 	public WPI_TalonSRX rightCompliantArm;
 	
 	public WPI_TalonSRX elevatorWinch;
+	
+	public TalonSRX test;
 	
 	//Instantiate Sparks and assign PWM Ports
 	public Spark leftGripper = new Spark(0);
@@ -53,10 +56,15 @@ public class RobotMap
 		FR = new WPI_TalonSRX(2);
 		BR = new WPI_TalonSRX(3);
 		
+		test = new TalonSRX(4);
+		
 		leftCompliantArm = new WPI_TalonSRX(4);
 		rightCompliantArm = new WPI_TalonSRX(5);
 		
 		elevatorWinch = new WPI_TalonSRX(6);
+		
+		FL.setSensorPhase(false);
+		FR.setSensorPhase(true);
 	}
 	
 }

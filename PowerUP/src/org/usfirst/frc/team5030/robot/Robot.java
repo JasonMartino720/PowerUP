@@ -11,12 +11,12 @@ import org.usfirst.frc.team5030.robot.subsystems.*;
 
 public class Robot extends TimedRobot {
 	
-	public static OI oi;
 	public static RobotMap robotmap;
 	public static Intake intakeSubsytem;
 	public static Drivetrain drivetrainSubsystem;
 	public static Climber climberSubsytem;
 	public static Elevator elevatorSubsystem;
+	public static OI oi;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -27,12 +27,12 @@ public class Robot extends TimedRobot {
 	 */ 
 	@Override
 	public void robotInit() {
-		oi = new OI();
 		robotmap = new RobotMap();
 		intakeSubsytem = new Intake();
 		drivetrainSubsystem = new Drivetrain();
 		climberSubsytem = new Climber();
 		elevatorSubsystem = new Elevator();
+		oi = new OI();
 		chooser.addDefault("Default Auto", new AUTO_Default());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -97,6 +97,8 @@ public class Robot extends TimedRobot {
 		// this line or comment it out.
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
+			
+			System.out.println("Left Encoder Value " + Robot.robotmap.FL.getSelectedSensorPosition(1/256));
 		}
 	}
 
