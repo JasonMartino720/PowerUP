@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AUTO_Motion_Profile_Test1 extends Command {
 	
 	private int i;
-	int kNumPoints = Test1.Points;
+	int kPoints = Test1.Points;
 	
 	public AUTO_Motion_Profile_Test1() {
         // Use requires() here to declare subsystem dependencies
@@ -28,6 +28,14 @@ public class AUTO_Motion_Profile_Test1 extends Command {
     	Robot.robotmap.FL.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 5);
     	Robot.robotmap.FR.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 5);
     	
+    	Robot.robotmap.FR.setInverted(true);
+    	
+    	//Set Talon Control Profiles
+    	Robot.robotmap.FL.set(ControlMode.MotionProfile, 1);
+    	Robot.robotmap.BL.follow(Robot.robotmap.FL);
+    	
+    	Robot.robotmap.FR.set(ControlMode.MotionProfile, 1);
+    	Robot.robotmap.BR.follow(Robot.robotmap.FR);
     		
     	//Clear Any Existing Trajectories
     	Robot.robotmap.FL.clearMotionProfileTrajectories();
@@ -40,9 +48,8 @@ public class AUTO_Motion_Profile_Test1 extends Command {
     	Robot.robotmap.FL.clearMotionProfileHasUnderrun(0);
     	Robot.robotmap.FR.clearMotionProfileHasUnderrun(0);
     	
-    	Robot.robotmap.FR.configMotionProfileTrajectoryPeriod(5, 5);
-    	Robot.robotmap.FL.configMotionProfileTrajectoryPeriod(5, 5);
-    	
+    	Robot.robotmap.FR.configMotionProfileTrajectoryPeriod(10, 10);
+    	Robot.robotmap.FL.configMotionProfileTrajectoryPeriod(10, 10);   	
     	
     	    	
     }
@@ -53,8 +60,7 @@ public class AUTO_Motion_Profile_Test1 extends Command {
     	com.ctre.phoenix.motion.TrajectoryPoint LPoint = new com.ctre.phoenix.motion.TrajectoryPoint();
     	com.ctre.phoenix.motion.TrajectoryPoint RPoint = new com.ctre.phoenix.motion.TrajectoryPoint();
     	
-    	
-    	for(i = 0; i < kNumPoints; i++)
+    	for(i = 0; i < kPoints; i++)
     	{
     		LPoint.position = Test1.leftProfilePosition[i];
     		RPoint.position = Test1.rightProfilePosition[i];
@@ -62,8 +68,8 @@ public class AUTO_Motion_Profile_Test1 extends Command {
     		LPoint.velocity = Test1.leftProfileVelocity[i];
     		RPoint.velocity = Test1.rightProfileVelocity[i];
     		
-    		LPoint.timeDur = com.ctre.phoenix.motion.TrajectoryPoint.TrajectoryDuration.Trajectory_Duration_10ms;
-    		RPoint.timeDur = com.ctre.phoenix.motion.TrajectoryPoint.TrajectoryDuration.Trajectory_Duration_10ms;
+    		LPoint.timeDur = com.ctre.phoenix.motion.TrajectoryPoint.TrajectoryDuration.Trajectory_Duration_5ms;
+    		RPoint.timeDur = com.ctre.phoenix.motion.TrajectoryPoint.TrajectoryDuration.Trajectory_Duration_5ms;
     		
     		LPoint.profileSlotSelect0 = 0;
     		RPoint.profileSlotSelect0 = 0;
@@ -71,20 +77,35 @@ public class AUTO_Motion_Profile_Test1 extends Command {
     		LPoint.zeroPos = false;
     		RPoint.zeroPos = false; 
     		
-    		if(i == 0) LPoint.zeroPos = true;
-    		if(i == 0) RPoint.zeroPos = true;
+    		if(i == kPoints) {
+    			
+    			LPoint.isLastPoint = true;
+    		}
+    		else
+    		{
+    			LPoint.isLastPoint = false;
+    		}
     		
-    		LPoint.isLastPoint = false;
-    		RPoint.isLastPoint = false;
-    		
-    		if((i=0) == kNumPoints) LPoint.isLastPoint = true;
-    		if((i=0) == kNumPoints) RPoint.isLastPoint = true;
+    		if(i == kPoints) {
+    			
+    			RPoint.isLastPoint = true;
+    		}
+    		else
+    		{
+    			RPoint.isLastPoint = false;
+    		}
     		
     		Robot.robotmap.FL.pushMotionProfileTrajectory(LPoint);
+    		Robot.robotmap.BL.follow(Robot.robotmap.FL);
     		Robot.robotmap.FR.pushMotionProfileTrajectory(RPoint);
-    		
+    		Robot.robotmap.BR.follow(Robot.robotmap.FR);
+    		    		
     	}
-    
+    	
+    	Robot.robotmap.FR.set(1);
+    	Robot.robotmap.FL.set(1);
+    	
+    	 
     	
     }
 
