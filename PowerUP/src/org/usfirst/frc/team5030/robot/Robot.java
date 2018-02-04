@@ -19,7 +19,7 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 
 	Command m_autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -33,9 +33,10 @@ public class Robot extends TimedRobot {
 		climberSubsytem = new Climber();
 		elevatorSubsystem = new Elevator();
 		oi = new OI();
-		chooser.addDefault("Default Auto", new AUTO_Default());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		m_chooser.addDefault("Default Auto", new AUTO_Default());
+		m_chooser.addObject("Motion Profile Test 1" , new AUTO_Motion_Profile_Test1());
+		// m_chooser.addObject("My Auto", new MyAutoCommand());
+		SmartDashboard.putData("Auto mode", m_chooser);
 	}
 
 	/**
@@ -54,19 +55,19 @@ public class Robot extends TimedRobot {
 	}
 
 	/**
-	 * This autonomous (along with the chooser code above) shows how to select
+	 * This autonomous (along with the m_chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
+	 * m_chooser code works with the Java SmartDashboard. If you prefer the
+	 * LabVIEW Dashboard, remove all of the m_chooser code and uncomment the
 	 * getString code to get the auto name from the text box below the Gyro
 	 *
 	 * <p>You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
+	 * m_chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = chooser.getSelected();
+		m_autonomousCommand = m_chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

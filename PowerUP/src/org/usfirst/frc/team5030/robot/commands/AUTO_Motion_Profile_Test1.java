@@ -1,45 +1,22 @@
 package org.usfirst.frc.team5030.robot.commands;
 
 import org.usfirst.frc.team5030.robot.Robot;
-
+import org.usfirst.frc.team5030.robot.commands.MotionProfiles.*;
 import com.ctre.phoenix.motion.MotionProfileStatus;
+import com.ctre.phoenix.motion.TrajectoryPoint;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
+/*TODO Make this work
+	   Find a way to clear buffer
+	   FInd a better way to enumerate org.usfirst.frc.team5030.robot.commands.MotionProfiles.*
+*/
 public class AUTO_Motion_Profile_Test1 extends Command {
 	
-	public static final int kNumPoints =185;	
 	private int i;
-	// Position (rotations)	Velocity (RPM)	Duration (ms)
-	public static double [][]leftProfilePosition = new double[][]{		
+	int kNumPoints = Test1.Points;
 	
-	};
-
-	public static double [][]rightProfilePosition = new double[][] {
-		
-	};
-	
-	public static double [][]leftProfileVelocity = new double[][]{		
-		
-	};
-
-	public static double [][]rightProfileVelocity = new double[][] {
-		
-	};
-	
-	public static double [][]leftProfileTime = new double[][]{		
-		
-	};
-
-	public static double [][]rightProfileTime = new double[][] {
-		
-	};
-	
-    public AUTO_Motion_Profile_Test1() {
+	public AUTO_Motion_Profile_Test1() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrainSubsystem);
     }
@@ -58,12 +35,17 @@ public class AUTO_Motion_Profile_Test1 extends Command {
     	Robot.robotmap.FL.clearMotionProfileTrajectories();
     	Robot.robotmap.FR.clearMotionProfileTrajectories();
     	
-    	Robot.robotmap.FL.config_kF(0,  , 5);
-    	Robot.robotmap.FR.config_kF(0, arg1, 5)
+    	Robot.robotmap.FL.config_kF(0, 1.303 , 5);
+    	Robot.robotmap.FR.config_kF(0, 1.303 , 5);
     	
-    	com.ctre.phoenix.motion.TrajectoryPoint LPoint = new com.ctre.phoenix.motion.TrajectoryPoint();
-    	com.ctre.phoenix.motion.TrajectoryPoint RPoint = new com.ctre.phoenix.motion.TrajectoryPoint();
+    	Robot.robotmap.FL.clearMotionProfileHasUnderrun(0);
+    	Robot.robotmap.FR.clearMotionProfileHasUnderrun(0);
     	
+    	Robot.robotmap.FR.configMotionProfileTrajectoryPeriod(5, 5);
+    	Robot.robotmap.FL.configMotionProfileTrajectoryPeriod(5, 5);
+    	
+    	
+    	    	
     }
 
     // Called repeatedly when this Command is scheduled to run 
@@ -72,16 +54,17 @@ public class AUTO_Motion_Profile_Test1 extends Command {
     	com.ctre.phoenix.motion.TrajectoryPoint LPoint = new com.ctre.phoenix.motion.TrajectoryPoint();
     	com.ctre.phoenix.motion.TrajectoryPoint RPoint = new com.ctre.phoenix.motion.TrajectoryPoint();
     	
+    	
     	for(i = 0; i < kNumPoints; i++)
     	{
-    		LPoint.position = leftProfilePosition[i][0];
-    		RPoint.position = rightProfilePosition[i][0];
+    		LPoint.position = Test1.leftProfilePosition[i];
+    		RPoint.position = Test1.rightProfilePosition[i];
     		
-    		LPoint.velocity = leftProfileVelocity[i][1];
-    		RPoint.velocity = rightProfileVelocity[i][1];
+    		LPoint.velocity = Test1.leftProfileVelocity[i];
+    		RPoint.velocity = Test1.rightProfileVelocity[i];
     		
-    		LPoint. = (int)leftProfileTime[i][2];
-    		RPoint.timeDurMs = (int)rightProfileTime[i][2];
+    		LPoint.timeDur = com.ctre.phoenix.motion.TrajectoryPoint.TrajectoryDuration.Trajectory_Duration_10ms;
+    		RPoint.timeDur = com.ctre.phoenix.motion.TrajectoryPoint.TrajectoryDuration.Trajectory_Duration_10ms;
     		
     		LPoint.profileSlotSelect0 = 0;
     		RPoint.profileSlotSelect0 = 0;
