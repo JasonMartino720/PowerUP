@@ -45,8 +45,6 @@ public class JoystickOperation extends Command {
     		
     	}
     	
-    	System.out.println("Right Enc " + Robot.robotmap.FR.getSelectedSensorVelocity(1/256));
-		System.out.println("Left Enc " + Robot.robotmap.FL.getSelectedSensorVelocity(1/256));
     }
 
     // Make this return true when this Command no longer needs to run execute()

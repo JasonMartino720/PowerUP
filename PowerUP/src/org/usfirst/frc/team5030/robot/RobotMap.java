@@ -26,8 +26,6 @@ public class RobotMap
 	
 	public WPI_TalonSRX elevatorWinch;
 	
-	public TalonSRX test;
-	
 	//Instantiate Sparks and assign PWM Ports
 	public Spark leftGripper = new Spark(0);
 	
@@ -55,8 +53,6 @@ public class RobotMap
 		BL = new WPI_TalonSRX(1);
 		FR = new WPI_TalonSRX(2);
 		BR = new WPI_TalonSRX(3);
-		
-		test = new TalonSRX(4);
 		
 		leftCompliantArm = new WPI_TalonSRX(4);
 		rightCompliantArm = new WPI_TalonSRX(5);
