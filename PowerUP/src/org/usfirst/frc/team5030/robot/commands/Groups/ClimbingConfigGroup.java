@@ -14,3 +14,4 @@ public class ClimbingConfigGroup extends CommandGroup {
     	*/
     }
 }
+ 

@@ -22,7 +22,7 @@ public class Drivetrain extends Subsystem
 	//This method for driving during the teleop phase requires the two doubles provided by the JoystickOperation Command 
 	public void UserDrive(double throttle, double rotation)
 	{
-		drive.arcadeDrive(-throttle, rotation);
+		drive.arcadeDrive(throttle, rotation);
 		
 	}
 
