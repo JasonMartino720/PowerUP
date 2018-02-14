@@ -2,7 +2,7 @@ package org.usfirst.frc.team5030.robot.commands.MotionProfiles;
 
 public class Test1{
 	
-	public static int Points;
+	public static int kNumPoints;
 	
 	// Position (rotations)	Velocity (RPM)	Duration (ms)
 	public static double[] leftProfilePosition = new double[] {
@@ -28,7 +28,7 @@ public class Test1{
 	
 	public Test1()
 	{
-		this.Points = leftProfilePosition.length;	
+		this.kNumPoints = leftProfilePosition.length;	
 	}
 	
 

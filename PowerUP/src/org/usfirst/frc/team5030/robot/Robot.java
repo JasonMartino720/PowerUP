@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
 		elevatorSubsystem = new Elevator();
 		oi = new OI();
 		m_chooser.addDefault("Default Auto", new AUTO_Default());
-		m_chooser.addObject("Motion Profile Test 1" , new AUTO_Motion_Profile_Test1());
+		m_chooser.addObject("Motion Profile Test 1" , new AUTO_ExecuteMotionProfile());
 		// m_chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
