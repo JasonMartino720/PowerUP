@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -27,12 +29,12 @@ public class RobotMap
 	public WPI_TalonSRX elevatorWinch;
 	
 	//Instantiate Sparks and assign PWM Ports
-	public Spark leftGripper = new Spark(0);
+	public Spark leftGripper = new Spark(2);
 	
 	public Spark rightGripper = new Spark(1);
 	
 	//Instantiate VictorSP and assign PWM Port
-	public VictorSP climber = new VictorSP(2);
+	public VictorSP climber = new VictorSP(0);
 	
 	//Instantiate and Assign Double Solenoid
 	public DoubleSolenoid intakeSolenoid = new DoubleSolenoid(0,1);

@@ -19,7 +19,7 @@ public class ElevatorOperation extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() 
     {
-    	this.speed = Robot.oi.operator.getY();
+    	speed = Robot.oi.operator.getY();
     	
     	Robot.elevatorSubsystem.operatorControl(speed);
     }

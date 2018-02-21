@@ -4,6 +4,7 @@ import org.usfirst.frc.team5030.robot.Robot;
 import org.usfirst.frc.team5030.robot.commands.*;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -18,12 +19,13 @@ public class Intake extends Subsystem {
 	private SpeedControllerGroup Compliant_Arm_Group 
 		= new SpeedControllerGroup(Robot.robotmap.leftCompliantArm, Robot.robotmap.rightCompliantArm);
 	
-	private double Gripper_Intake_Speed = 1.0;
+	private double Gripper_Intake_Speed = 0.5;
 	
 	public Intake()
 	{
 		//Invert One of the gripper motors
-		Robot.robotmap.rightGripper.setInverted(true);
+		
+		Robot.robotmap.leftCompliantArm.setInverted(true);
 		Robot.robotmap.rightCompliantArm.setInverted(true);
 	} 
 	
@@ -38,16 +40,17 @@ public class Intake extends Subsystem {
     //Slight offset on the speeds of the arms to help facilitate corner grabbing
     public void IntakeIn()
     {
-    	this.Gripper_Group.set(Gripper_Intake_Speed);
-    	Robot.robotmap.leftCompliantArm.set(0.75);
-    	Robot.robotmap.rightCompliantArm.set(0.65);
+    	Robot.robotmap.leftGripper.set(0.3);
+    	Robot.robotmap.rightGripper.set(0.4);
+    	Robot.robotmap.leftCompliantArm.set(0.5);
+    	Robot.robotmap.rightCompliantArm.set(0.5);
     }
 
     //Intake outwards, used for when cube is on the ground still
     public void IntakeOut()
     {
-    	this.Gripper_Group.set(-1.0);
-    	Compliant_Arm_Group.set(-1.0);
+    	this.Gripper_Group.set(-0.5);
+    	Compliant_Arm_Group.set(-0.5);
     }
     
     //Place cube in Switch or scale
@@ -59,12 +62,12 @@ public class Intake extends Subsystem {
     
     public void intakeStartPosition()
     {
-    	Robot.robotmap.intakeSolenoid.set(DoubleSolenoid.Value.kForward);
+    	Robot.robotmap.intakeSolenoid.set(Value.kReverse);
     }
     
     public void intakeOutPosition()
     {
-    	Robot.robotmap.intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
+    	Robot.robotmap.intakeSolenoid.set(Value.kForward);
     }
  
     public void initDefaultCommand() {
