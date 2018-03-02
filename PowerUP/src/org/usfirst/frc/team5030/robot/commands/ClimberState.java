@@ -26,7 +26,7 @@ public class ClimberState extends Command {
     	}
     	else
     	{
-    		Robot.climberSubsytem.ClimberOff();
+    		Robot.climberSubsytem.ClimberStop();
     	}
     }
 
@@ -37,7 +37,7 @@ public class ClimberState extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.climberSubsytem.ClimberOff();
+    	Robot.climberSubsytem.ClimberStop();
     }
 
     // Called when another command which requires one or more of the same

@@ -30,7 +30,7 @@ public class Intake extends Subsystem {
 	} 
 	
 	//Turn off both SpeedControllerGroups
-    public void IntakeOff()
+    public void IntakeStop()
     {
     	this.Gripper_Group.set(0.0);
     	this.Compliant_Arm_Group.set(0.0);

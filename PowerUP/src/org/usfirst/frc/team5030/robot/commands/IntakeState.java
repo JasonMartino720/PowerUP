@@ -35,7 +35,7 @@ public class IntakeState extends Command {
     	}
     	else
     	{
-    		Robot.intakeSubsytem.IntakeOff();
+    		Robot.intakeSubsytem.IntakeStop();
     	}
     	
     }

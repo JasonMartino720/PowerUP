@@ -25,7 +25,6 @@ public class JoystickOperation extends Command {
     protected void initialize() {
     	Robot.robotmap.FL.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
     	Robot.robotmap.FR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
-    
     	
     }
 
@@ -36,7 +35,7 @@ public class JoystickOperation extends Command {
     	rotation = Robot.oi.driver.getX();
     	
     	//pass values back to UserDrive Method of Drivetrian subsystem
-    	Robot.drivetrainSubsystem.UserDrive(throttle, rotation);
+    	Robot.drivetrainSubsystem.ArcadeDrive(throttle, rotation);
     	
     	if(Robot.oi.rbbutton.get())
     	{

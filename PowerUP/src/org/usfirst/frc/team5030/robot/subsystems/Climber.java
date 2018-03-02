@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 //TODO Figure out Invert so spinning direction is positive
 public class Climber extends Subsystem {
 	
-	public void ClimberOff()
+	public void ClimberStop()
     {
     	Robot.robotmap.climber.set(0.0);
     }

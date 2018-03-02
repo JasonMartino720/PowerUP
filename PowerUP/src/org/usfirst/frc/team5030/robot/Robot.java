@@ -34,10 +34,14 @@ public class Robot extends TimedRobot {
 		elevatorSubsystem = new Elevator();
 		oi = new OI();
 		m_chooser.addDefault("Default Auto", new AUTO_Default());
-		//m_chooser.addObject("Motion Profile Test 1" , new AUTO_ExecuteMotionProfile());
-		// m_chooser.addObject("My Auto", new MyAutoCommand());
+		m_chooser.addObject("Cross Line For Time" , new AUTO_CrossLine());
+		m_chooser.addObject("Right Switch Auto", new AUTO_RightSwitch());
+		m_chooser.addObject("Left Switch Auto" , new AUTO_LeftSwitch());
 		SmartDashboard.putData("Auto mode", m_chooser);
-	}
+		
+		Robot.drivetrainSubsystem.EncReset();
+		Robot.drivetrainSubsystem.ConifgMagEncoder();
+	} 
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -99,8 +103,12 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 			
-			System.out.println("Left Encoder Value " + Robot.robotmap.FL.getSelectedSensorPosition(1/256));
+			
 		}
+		
+		Robot.drivetrainSubsystem.EncReset();
+	
+		
 	}
 
 	/**
@@ -109,6 +117,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		System.out.println("Gyro " + Robot.robotmap.gyro.getAngle());
+			
 	}
 
 	/**

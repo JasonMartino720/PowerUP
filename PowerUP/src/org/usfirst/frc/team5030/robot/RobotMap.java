@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -46,6 +48,7 @@ public class RobotMap
 	public DigitalInput scaleHeight = new DigitalInput(8);
 	public DigitalInput maxHeight = new DigitalInput(9);
 	
+	public AnalogGyro gyro = new AnalogGyro(0);
 	
 	public RobotMap()
 	{

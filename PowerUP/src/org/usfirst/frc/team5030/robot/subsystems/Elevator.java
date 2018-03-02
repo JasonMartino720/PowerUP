@@ -22,7 +22,6 @@ public class Elevator extends Subsystem {
 		{
 			Robot.robotmap.elevatorWinch.set(0.0);
 		}
-		System.out.println("Speed " + speed);
 	
 	}
 
@@ -68,6 +67,10 @@ public class Elevator extends Subsystem {
 		*/
 	}
 	
+	public void elevatorStop()
+	{
+		Robot.robotmap.elevatorWinch.set(0.0);
+	}
 	
 	public Elevator()
 	{
