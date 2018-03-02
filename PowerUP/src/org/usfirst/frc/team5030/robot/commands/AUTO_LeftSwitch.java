@@ -12,12 +12,24 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AUTO_LeftSwitch extends CommandGroup {
 
-    public AUTO_LeftSwitch() {
-    	addSequential(new TurnToAngle(30 , 0.5));
-    	/*addSequential(new AutoDriveDistance(150, 0.65));
-    	addSequential(new TurnToAngle(0 , 0.5));
-    	addSequential(new AutoDriveDistance(15 , 0.5));
-    	addSequential(new PlaceCube());
-    	*/
+private String gameData;
+	
+    public AUTO_LeftSwitch() 
+{
+        
+    if(gameData.length() > 0)
+    {
+		if(gameData.charAt(0) == 'L')
+		{
+			addSequential(new AUTO_DriveLeftSwitch());
+			addSequential(new PlaceCube());
+		}
+    	
     }
+    else
+    {
+    	Robot.drivetrainSubsystem.AllStop();
+    }
+}
+
 }

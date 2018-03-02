@@ -10,9 +10,24 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AUTO_RightSwitch extends CommandGroup {
 
-    public AUTO_RightSwitch() {
+	private String gameData;
+	
+    public AUTO_RightSwitch() 
+{
         
-    	addSequential(new AutoDriveDistance(120 , 0.65) , 6);
-    	addSequential(new PlaceCube() , 0.5);
+    if(gameData.length() > 0)
+    {
+		if(gameData.charAt(0) == 'R')
+		{
+			addSequential(new AutoDriveDistance(120 , 0.65) , 6);
+	    	addSequential(new PlaceCube() , 0.5);
+		}
+    	
     }
+    else
+    {
+    	Robot.drivetrainSubsystem.AllStop();
+    }
+}
+
 }
