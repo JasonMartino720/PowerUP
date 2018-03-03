@@ -18,16 +18,17 @@ public class AUTO_CrossLine extends Command {
     protected void initialize() {
     	Robot.drivetrainSubsystem.EncReset();
     	Robot.drivetrainSubsystem.ConifgMagEncoder();
+    	Robot.intakeSubsytem.intakeOutPosition();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrainSubsystem.ArcadeDrive(-0.75, 0.0);
+    	Robot.drivetrainSubsystem.ArcadeDrive(-0.5, 0.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(timeSinceInitialized() < 4)
+        if(timeSinceInitialized() < 7)
         {
         	return false;
         }

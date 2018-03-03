@@ -25,6 +25,7 @@ public class Intake extends Subsystem {
 	{
 		//Invert One of the gripper motors
 		
+		Robot.robotmap.leftGripper.setInverted(true);
 		Robot.robotmap.leftCompliantArm.setInverted(true);
 		Robot.robotmap.rightCompliantArm.setInverted(true);
 	} 
@@ -40,10 +41,10 @@ public class Intake extends Subsystem {
     //Slight offset on the speeds of the arms to help facilitate corner grabbing
     public void IntakeIn()
     {
-    	Robot.robotmap.leftGripper.set(0.3);
-    	Robot.robotmap.rightGripper.set(0.4);
-    	Robot.robotmap.leftCompliantArm.set(0.5);
-    	Robot.robotmap.rightCompliantArm.set(0.5);
+    	Robot.robotmap.leftGripper.set(0.5);
+    	Robot.robotmap.rightGripper.set(0.5);
+    	Robot.robotmap.leftCompliantArm.set(0.4);
+    	Robot.robotmap.rightCompliantArm.set(0.35);
     }
 
     //Intake outwards, used for when cube is on the ground still
@@ -57,7 +58,8 @@ public class Intake extends Subsystem {
     //Uses the gripper section of the elevator ONLY
     public void PlaceCube()
     {
-    	this.Gripper_Group.set(-0.75);
+    	Robot.robotmap.leftGripper.set(1.0);
+    	Robot.robotmap.rightGripper.set(1.0);
     }
     
     public void intakeStartPosition()

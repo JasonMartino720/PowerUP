@@ -31,9 +31,9 @@ public class RobotMap
 	public WPI_TalonSRX elevatorWinch;
 	
 	//Instantiate Sparks and assign PWM Ports
-	public Spark leftGripper = new Spark(2);
+	public Spark leftGripper = new Spark(1);
 	
-	public Spark rightGripper = new Spark(1);
+	public Spark rightGripper = new Spark(2);
 	
 	//Instantiate VictorSP and assign PWM Port
 	public VictorSP climber = new VictorSP(0);

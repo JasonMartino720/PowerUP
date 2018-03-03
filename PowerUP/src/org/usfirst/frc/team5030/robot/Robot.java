@@ -36,6 +36,7 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Default Auto", new AUTO_Default());
 		m_chooser.addObject("Cross Line For Time" , new AUTO_CrossLine());
 		m_chooser.addObject("Right Switch Auto", new AUTO_RightSwitch());
+		m_chooser.addObject("Left Switch" , new AUTO_LeftSwitch());
 		m_chooser.addObject("Switch Selector", new AUTO_SwitchSelector());
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
@@ -118,8 +119,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		
-		System.out.println("Gyro " + Robot.robotmap.gyro.getAngle());
 			
 	}
 

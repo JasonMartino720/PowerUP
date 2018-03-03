@@ -27,16 +27,7 @@ public class PlaceCube extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(edu.wpi.first.wpilibj.Timer.getMatchTime() < timeStart + 0.5)
-    	{
-    		Robot.intakeSubsytem.PlaceCube();
-    	}
-    	else
-    	{
-    		Robot.intakeSubsytem.IntakeStop();
-    		finished = true;
-    		
-    	}
+    	Robot.intakeSubsytem.PlaceCube();
     }
 
     // Make this return true when this Command no longer needs to run execute()

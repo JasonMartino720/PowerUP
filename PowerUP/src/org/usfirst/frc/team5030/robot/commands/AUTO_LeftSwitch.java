@@ -4,6 +4,7 @@ import org.usfirst.frc.team5030.robot.AutoDriveDistance;
 import org.usfirst.frc.team5030.robot.Robot;
 import org.usfirst.frc.team5030.robot.TurnToAngle;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -16,6 +17,8 @@ private String gameData;
 	
     public AUTO_LeftSwitch() 
 {
+    	
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
         
     if(gameData.length() > 0)
     {
