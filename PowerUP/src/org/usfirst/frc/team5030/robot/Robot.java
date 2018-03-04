@@ -1,15 +1,25 @@
 package org.usfirst.frc.team5030.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team2791.robot.util.autonChoosers.AutonCommandChooser;
 import org.usfirst.frc.team5030.robot.commands.*;
+import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_CenterPosition;
+import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_LeftPosition;
+import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_RightPosition;
 import org.usfirst.frc.team5030.robot.subsystems.*;
 
 
 public class Robot extends TimedRobot {
+	
+	public static boolean crossCheckbox;
+	
+	public static String receivedGameData;
 	
 	public static RobotMap robotmap;
 	public static Intake intakeSubsytem;
@@ -17,9 +27,13 @@ public class Robot extends TimedRobot {
 	public static Climber climberSubsytem;
 	public static Elevator elevatorSubsystem;
 	public static OI oi;
+	
+	public static boolean weOwnLeftSideNearSwitch, weOwnLeftSideScale, weOwnLeftSideFarSwitch;
+	AutonCommandChooser autonCommandChooser;
 
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<AutoMode> m_chooser = new SendableChooser<>();
+	SendableChooser<Boolean> CrossCheckbox = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -33,13 +47,22 @@ public class Robot extends TimedRobot {
 		climberSubsytem = new Climber();
 		elevatorSubsystem = new Elevator();
 		oi = new OI();
-		m_chooser.addDefault("Default Auto", new AUTO_Default());
-		m_chooser.addObject("Cross Line For Time" , new AUTO_CrossLine());
-		m_chooser.addObject("Right Switch Auto", new AUTO_RightSwitch());
-		m_chooser.addObject("Left Switch" , new AUTO_LeftSwitch());
-		m_chooser.addObject("Switch Selector", new AUTO_SwitchSelector());
+		m_chooser.addDefault("Default Auto", AutoMode.DEFAULT);//new AUTO_Default());
+		m_chooser.addObject("Cross Line For Time" , AutoMode.CROSS_LINE);
+		m_chooser.addObject("Right Position", AutoMode.RIGHT_POSITION);
+		m_chooser.addObject("Center Position" , AutoMode.CENTER_POSITION);
+		m_chooser.addObject("Left Position"	, AutoMode.LEFT_POSITION);
+
+	/*	m_chooser.addObject("Right Position", new AUTO_RightPosition());
+		m_chooser.addObject("Decide Switch" , new AUTO_CenterPosition());
+		m_chooser.addObject("Left Position" , new AUTO_LeftPosition());
+		*/
+		
+		CrossCheckbox.addDefault("NO", false);
+		CrossCheckbox.addObject("YES", true);
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
+		SmartDashboard.putData("Cross?" , CrossCheckbox);
 		
 		Robot.drivetrainSubsystem.EncReset();
 		Robot.drivetrainSubsystem.ConifgMagEncoder();
@@ -73,8 +96,48 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
-
+		
+		// TODO
+		// put get game data here.
+		// put shaker chooser code here.
+		
+		
+		
+		
+		
+		
+//		receivedGameData = org.usfirst.frc.team5030.robot.commands.GetGameData.gameData;
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		if (gameData != null && gameData.length() == 3) {
+			switch(m_chooser.getSelected()) {
+			
+			case CROSS_LINE:
+				m_autonomousCommand = new AUTO_CrossLine();
+				break;
+				
+			case RIGHT_POSITION:
+				m_autonomousCommand = new AUTO_RightPosition(gameData);
+				break;
+				
+			case CENTER_POSITION:
+				m_autonomousCommand = new AUTO_CenterPosition(gameData);
+				break;
+				
+			case LEFT_POSITION:
+				m_autonomousCommand = new AUTO_LeftPosition(gameData);
+				break;
+				
+			case DEFAULT:
+			default:
+				m_autonomousCommand = new AUTO_Default();
+			}
+		}
+		else {
+			m_autonomousCommand = new AUTO_Default();
+		}
+		
+		crossCheckbox = CrossCheckbox.getSelected();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -127,5 +190,34 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+	
+	public void updateGameData(boolean retry){
+		String data = DriverStation.getInstance().getGameSpecificMessage();
+		if(retry) {
+			int retries = 50;
+			// Retry code taken from 5687! Thanks!
+			// https://www.chiefdelphi.com/forums/showpost.php?p=1735952&postcount=22
+			data = DriverStation.getInstance().getGameSpecificMessage();
+	        while (data.length() < 2 && retries > 0) {
+	            retries--;
+	            try {
+	                Thread.sleep(5);
+	            } catch (InterruptedException ie) {
+	                // Just ignore the interrupted exception
+	            }
+	            data = DriverStation.getInstance().getGameSpecificMessage();
+	        }
+		}
+
+		if(data.length() > 0){
+			weOwnLeftSideNearSwitch = data.charAt(0) == 'L';
+			weOwnLeftSideScale = data.charAt(1) == 'L';
+			weOwnLeftSideFarSwitch = data.charAt(2) == 'L';
+
+			SmartDashboard.putBoolean("leftSwitchNear", weOwnLeftSideNearSwitch);
+			SmartDashboard.putBoolean("leftScale", weOwnLeftSideScale);
+			SmartDashboard.putBoolean("leftSwitchFar", weOwnLeftSideFarSwitch);
+		}
 	}
 }

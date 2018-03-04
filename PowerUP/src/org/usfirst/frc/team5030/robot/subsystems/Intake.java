@@ -41,16 +41,16 @@ public class Intake extends Subsystem {
     //Slight offset on the speeds of the arms to help facilitate corner grabbing
     public void IntakeIn()
     {
-    	Robot.robotmap.leftGripper.set(0.5);
-    	Robot.robotmap.rightGripper.set(0.5);
-    	Robot.robotmap.leftCompliantArm.set(0.4);
-    	Robot.robotmap.rightCompliantArm.set(0.35);
+    	Robot.robotmap.leftGripper.set(-0.5);
+    	Robot.robotmap.rightGripper.set(-0.5);
+    	Robot.robotmap.leftCompliantArm.set(0.5);
+    	Robot.robotmap.rightCompliantArm.set(0.45);
     }
 
     //Intake outwards, used for when cube is on the ground still
     public void IntakeOut()
     {
-    	this.Gripper_Group.set(-0.5);
+    	this.Gripper_Group.set(0.5);
     	Compliant_Arm_Group.set(-0.5);
     }
     

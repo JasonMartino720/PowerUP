@@ -12,7 +12,7 @@ public class AutoDriveDistance extends Command
 	private double error;
 	private double speed;
 	private final double kP = 1.5;
-	public static int kEncoderConversion = 240;
+	public static int kEncoderConversion = 54;
 	
     public AutoDriveDistance(double distanceInches, double userSpeed)
     {
@@ -29,7 +29,7 @@ public class AutoDriveDistance extends Command
     protected void execute()
     {
     	  	
-    	if(Robot.drivetrainSubsystem.CurrentEncoderPositionAverage() < EncoderDrivingDistance)
+    	if(Robot.robotmap.FL.getSelectedSensorPosition(1/1024) < EncoderDrivingDistance)
     	{
     		Robot.drivetrainSubsystem.ArcadeDrive(-speed, 0.0);
     		DrivingFinished = false;
@@ -49,8 +49,6 @@ public class AutoDriveDistance extends Command
 	protected void end()
 	{
 		Robot.drivetrainSubsystem.AllStop();
-		Robot.intakeSubsytem.IntakeStop();
-		Robot.elevatorSubsystem.elevatorStop();
 	}
 	
 }

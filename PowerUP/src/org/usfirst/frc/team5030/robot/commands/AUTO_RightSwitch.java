@@ -22,9 +22,13 @@ public class AUTO_RightSwitch extends CommandGroup {
     {
 		if(gameData.charAt(0) == 'R')
 		{
-			addSequential(new AutoDriveDistance(120 , 0.65) , 6);
+			addSequential(new AutoDriveDistance(120 , 0.65) , 5);
 	    	addSequential(new PlaceCube() , 1);
 	    	System.out.println("Running ");
+		}
+		else
+		{
+			Robot.drivetrainSubsystem.AllStop();
 		}
     	
     }

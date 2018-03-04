@@ -20,6 +20,17 @@ private final double kP = 1;
 	
 	protected void initialize()
 	{
+		Robot.robotmap.FL.configNominalOutputForward(0.25, 10);
+		Robot.robotmap.FL.configNominalOutputReverse(0.25, 10);
+		
+		Robot.robotmap.FR.configNominalOutputForward(0.25, 10);
+		Robot.robotmap.FR.configNominalOutputReverse(0.25, 10);
+		
+		Robot.robotmap.BL.configNominalOutputForward(0.25, 10);
+		Robot.robotmap.BL.configNominalOutputReverse(0.25, 10);
+		
+		Robot.robotmap.BR.configNominalOutputForward(0.25, 10);
+		Robot.robotmap.BR.configNominalOutputReverse(0.25, 10);
 		Robot.drivetrainSubsystem.GyroReset();
 	}
 	

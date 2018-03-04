@@ -23,7 +23,7 @@ public class Drivetrain extends Subsystem
 	SpeedControllerGroup leftDrive = new SpeedControllerGroup(Robot.robotmap.FL, Robot.robotmap.BL);
 	SpeedControllerGroup rightDrive = new SpeedControllerGroup(Robot.robotmap.FR, Robot.robotmap.BR);
 
-	private double deadband = 0.2;
+	private double deadband = 0.025;
 	
 	
 	

@@ -30,6 +30,7 @@ public class AUTO_SwitchSelector extends CommandGroup {
 			else
 			{
 				addParallel(new AUTO_Default());
+				
 			}
         }
         

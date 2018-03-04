@@ -35,13 +35,15 @@ public class JoystickOperation extends Command {
     	rotation = Robot.oi.driver.getX();
     	
     	//pass values back to UserDrive Method of Drivetrian subsystem
-    	Robot.drivetrainSubsystem.ArcadeDrive(throttle, rotation);
     	
     	if(Robot.oi.rbbutton.get())
     	{
-    		Robot.robotmap.FR.getSensorCollection().setQuadraturePosition(0, 5);
-    		Robot.robotmap.FL.getSensorCollection().setQuadraturePosition(0, 5);
+    		Robot.drivetrainSubsystem.ArcadeDrive(throttle * 0.75, rotation * 0.75);
     		
+    	}
+    	else
+    	{
+    		Robot.drivetrainSubsystem.ArcadeDrive(throttle , rotation);
     	}
     	
     }
