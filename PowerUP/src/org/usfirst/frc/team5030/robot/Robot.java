@@ -7,7 +7,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team2791.robot.commands.auto.BangBangTurnSwitchLEFT;
+import org.usfirst.frc.team2791.robot.commands.auto.BangBangTurnSwitchRIGHT;
 import org.usfirst.frc.team2791.robot.util.autonChoosers.AutonCommandChooser;
+import org.usfirst.frc.team2791.robot.util.autonChoosers.NearSwitchAutonChooser;
 import org.usfirst.frc.team5030.robot.commands.*;
 import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_CenterPosition;
 import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_LeftPosition;
@@ -34,6 +37,7 @@ public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
 	SendableChooser<AutoMode> m_chooser = new SendableChooser<>();
 	SendableChooser<Boolean> CrossCheckbox = new SendableChooser<>();
+	
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -81,6 +85,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		debug();
 	}
 
 	/**
@@ -100,55 +105,26 @@ public class Robot extends TimedRobot {
 		// TODO
 		// put get game data here.
 		// put shaker chooser code here.
+		updateGameData(true);
 		
-		
-		
-		
-		
-		
-//		receivedGameData = org.usfirst.frc.team5030.robot.commands.GetGameData.gameData;
-		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		if (gameData != null && gameData.length() == 3) {
-			switch(m_chooser.getSelected()) {
+		autonCommandChooser = new NearSwitchAutonChooser(
+				new BangBangTurnSwitchLEFT(), // this will run when we are on the left side of the switch
+				new BangBangTurnSwitchRIGHT() // this will run when we are on the right side of the switch
+			);
 			
-			case CROSS_LINE:
-				m_autonomousCommand = new AUTO_CrossLine();
-				break;
-				
-			case RIGHT_POSITION:
-				m_autonomousCommand = new AUTO_RightPosition(gameData);
-				break;
-				
-			case CENTER_POSITION:
-				m_autonomousCommand = new AUTO_CenterPosition(gameData);
-				break;
-				
-			case LEFT_POSITION:
-				m_autonomousCommand = new AUTO_LeftPosition(gameData);
-				break;
-				
-			case DEFAULT:
-			default:
-				m_autonomousCommand = new AUTO_Default();
-			}
-		}
-		else {
-			m_autonomousCommand = new AUTO_Default();
-		}
-		
-		crossCheckbox = CrossCheckbox.getSelected();
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
+		m_autonomousCommand = autonCommandChooser.getCommand(weOwnLeftSideNearSwitch, weOwnLeftSideScale, weOwnLeftSideFarSwitch);
 
-		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
-		}
+//		// schedule the autonomous command (example)
+//		if (m_autonomousCommand != null) {
+//			m_autonomousCommand.start();
+//		} else {
+//			m_autonomousCommand = new AUTO_CrossLine();
+//			m_autonomousCommand.start();
+//		}
+		
+		
+		m_autonomousCommand = new AUTO_CrossLine();
+		m_autonomousCommand.start();
 	}
 
 	/**
@@ -157,6 +133,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		debug();
 	}
 
 	@Override
@@ -165,10 +142,9 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
-			
-			
 		}
 		
 		Robot.drivetrainSubsystem.EncReset();
@@ -182,6 +158,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		debug();
 			
 	}
 
@@ -219,5 +196,10 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putBoolean("leftScale", weOwnLeftSideScale);
 			SmartDashboard.putBoolean("leftSwitchFar", weOwnLeftSideFarSwitch);
 		}
+	}
+	
+	public void debug() {
+		SmartDashboard.putNumber("! GYRO ", robotmap.gyro.getAngle());
+		SmartDashboard.putNumber("! Encoders", drivetrainSubsystem.CurrentEncoderPositionInchesAverage());
 	}
 }

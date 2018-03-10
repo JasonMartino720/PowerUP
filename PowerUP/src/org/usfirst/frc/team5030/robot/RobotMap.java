@@ -47,11 +47,12 @@ public class RobotMap
 	public DigitalInput switchHeight = new DigitalInput(7);	
 	public DigitalInput scaleHeight = new DigitalInput(8);
 	public DigitalInput maxHeight = new DigitalInput(9);
-	
+
 	public AnalogGyro gyro = new AnalogGyro(0);
 	
 	public RobotMap()
 	{
+		gyro.calibrate();
 		//Assign Device ID's for Talon SRX's
 		
 		FL = new WPI_TalonSRX(0);

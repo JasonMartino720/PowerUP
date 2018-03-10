@@ -2,13 +2,15 @@ package org.usfirst.frc.team5030.robot.subsystems;
 
 import org.usfirst.frc.team5030.robot.AutoDriveDistance;
 import org.usfirst.frc.team5030.robot.Robot;
-import org.usfirst.frc.team5030.robot.commands.*;
+import org.usfirst.frc.team5030.robot.commands.JoystickOperation;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 //TODO Test all motors and decide inverts
 //TODO figureo out appropriate deadband
@@ -43,6 +45,7 @@ public class Drivetrain extends Subsystem
 		Robot.robotmap.FL.set(0.0);
 		Robot.robotmap.BR.set(0.0);
 		Robot.robotmap.BL.set(0.0);
+	
 	}
 	
     public void initDefaultCommand() 
@@ -99,6 +102,14 @@ public class Drivetrain extends Subsystem
     	drive = new DifferentialDrive(leftDrive, rightDrive);
     	drive.setDeadband(this.deadband);
     	drive.setExpiration(0.1);
+    
+    	BaseMotorController[] SCS = new BaseMotorController[] {Robot.robotmap.FR, Robot.robotmap.FL, Robot.robotmap.BR, Robot.robotmap.BL};
+		
+		for(int i = 0; i < SCS .length; i++) {
+			SCS[i].enableVoltageCompensation(true);
+			SCS[i].configVoltageCompSaturation(12, 20);
+			SCS[i].configOpenloopRamp(0.5, 3);
+		}
     }
 }
 
