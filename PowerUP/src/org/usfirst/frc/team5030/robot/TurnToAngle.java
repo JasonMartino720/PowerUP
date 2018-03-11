@@ -1,71 +1,85 @@
 package org.usfirst.frc.team5030.robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ *
+ */
 public class TurnToAngle extends Command {
 
-private double targetAngle;
-private double currentAngle;
-private double error;
-private double speed;
-private final double kTolerance = 1; 
-private final double kP = 1;
+	double power, amountToTurn;
+	double stopAngle;
+	double timeToTurn = 2791;
 
+	protected Timer timer = new Timer();
 
-	public TurnToAngle(double TargetAngle, double Speed)
-	{
-		targetAngle = TargetAngle;
-		speed = Speed;
+	/**
+	 * @param angle degrees that you want to turn
+	 * @param power amount of power you want in the turn
+	 * @param timeOut seconds before you want to time out
+	 */
+	public TurnToAngle(double angle, double power, double timeOut) {
+		this(angle, power);
+		timeToTurn = timeOut;
 	}
-	
-	protected void initialize()
-	{
-		Robot.robotmap.FL.configNominalOutputForward(0.25, 10);
-		Robot.robotmap.FL.configNominalOutputReverse(0.25, 10);
-		
-		Robot.robotmap.FR.configNominalOutputForward(0.25, 10);
-		Robot.robotmap.FR.configNominalOutputReverse(0.25, 10);
-		
-		Robot.robotmap.BL.configNominalOutputForward(0.25, 10);
-		Robot.robotmap.BL.configNominalOutputReverse(0.25, 10);
-		
-		Robot.robotmap.BR.configNominalOutputForward(0.25, 10);
-		Robot.robotmap.BR.configNominalOutputReverse(0.25, 10);
-		Robot.drivetrainSubsystem.GyroReset();
+
+	/**
+	 * Time Out is defaulted to 2791 seconds
+	 * @param turn amount of power you want in the turn
+	 * @param angle degrees that you want to turn  
+	 */
+	public TurnToAngle(double angle, double power) {
+		super("TurnGyro w/ BangBang");
+		requires(Robot.drivetrainSubsystem);
+		this.power = power;
+		amountToTurn = angle;
+		assert(Math.signum(power) == Math.signum(angle));
 	}
-	
-	protected void Execute()
-	{
-		currentAngle = Robot.robotmap.gyro.getAngle();
-		System.out.println("Gyro " + currentAngle);
-		error = targetAngle - currentAngle;
-		speed = error / (kP / Math.abs(speed));
-		
-		if(speed > 1){
-			speed = 1; }
-		
-		if(speed < -1) {
-			speed = -1; }
-		
-		Robot.drivetrainSubsystem.ArcadeDrive(0.0, speed);
+
+	// Called just before this Command runs the first time
+	protected void initialize() {
+		timer.reset();
+		timer.start();
+		stopAngle = Robot.robotmap.gyro.getAngle() + amountToTurn;
+		System.out.println("Starting gyro bang bang turn. power: "+power+"  Stop angle: "+stopAngle);
+//		System.out.println("Starting at distance: "+Robot.drivetrain.getAverageDist());
 	}
-	
-	
-	
+
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		Robot.drivetrainSubsystem.ArcadeDrive(0, power);
+	}
+
+	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return Math.abs(targetAngle - currentAngle) < 3;
-	
-	}
-	
-	protected void end() {
-    	System.out.println("DONE");
-    	Robot.drivetrainSubsystem.AllStop();
-    }
+		if(timer.get() > timeToTurn){
+			System.out.println("Gyro bang bang turn timed out");
+			return true;
+		}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	Robot.drivetrainSubsystem.AllStop();
-    }
+		if(power > 0) {
+			if(Robot.robotmap.gyro.getAngle() > stopAngle) {
+				System.out.println("Stopping at angle: "+Robot.robotmap.gyro.getAngle());
+				return true;
+			}
+		} else {
+			if(Robot.robotmap.gyro.getAngle() < stopAngle) {
+				System.out.println("Stopping at angle: "+Robot.robotmap.gyro.getAngle());
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// Called once after isFinished returns true
+	protected void end() {
+		Robot.drivetrainSubsystem.ArcadeDrive(0, 0);
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+		end();
+	}
 }

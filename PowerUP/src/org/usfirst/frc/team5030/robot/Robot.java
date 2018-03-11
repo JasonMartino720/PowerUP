@@ -6,17 +6,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team2791.robot.commands.auto.BangBangTurnSwitchLEFT;
-import org.usfirst.frc.team2791.robot.commands.auto.BangBangTurnSwitchRIGHT;
-import org.usfirst.frc.team2791.robot.util.autonChoosers.AutonCommandChooser;
-import org.usfirst.frc.team2791.robot.util.autonChoosers.NearSwitchAutonChooser;
 import org.usfirst.frc.team5030.robot.commands.*;
 import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_CenterPosition;
 import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_LeftPosition;
 import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_RightPosition;
+import org.usfirst.frc.team5030.robot.commands.Groups.BangBangTurnSwitchLEFT;
+import org.usfirst.frc.team5030.robot.commands.Groups.BangBangTurnSwitchRIGHT;
 import org.usfirst.frc.team5030.robot.subsystems.*;
-
+ 
 
 public class Robot extends TimedRobot {
 	
@@ -30,9 +27,6 @@ public class Robot extends TimedRobot {
 	public static Climber climberSubsytem;
 	public static Elevator elevatorSubsystem;
 	public static OI oi;
-	
-	public static boolean weOwnLeftSideNearSwitch, weOwnLeftSideScale, weOwnLeftSideFarSwitch;
-	AutonCommandChooser autonCommandChooser;
 
 	Command m_autonomousCommand;
 	SendableChooser<AutoMode> m_chooser = new SendableChooser<>();
@@ -70,6 +64,7 @@ public class Robot extends TimedRobot {
 		
 		Robot.drivetrainSubsystem.EncReset();
 		Robot.drivetrainSubsystem.ConifgMagEncoder();
+		Robot.drivetrainSubsystem.GyroReset();
 	} 
 
 	/**
@@ -102,29 +97,49 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		
-		// TODO
-		// put get game data here.
-		// put shaker chooser code here.
-		updateGameData(true);
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-		autonCommandChooser = new NearSwitchAutonChooser(
-				new BangBangTurnSwitchLEFT(), // this will run when we are on the left side of the switch
-				new BangBangTurnSwitchRIGHT() // this will run when we are on the right side of the switch
-			);
+		if (gameData != null && gameData.length() == 3) {
+			switch(m_chooser.getSelected()) {
 			
-		m_autonomousCommand = autonCommandChooser.getCommand(weOwnLeftSideNearSwitch, weOwnLeftSideScale, weOwnLeftSideFarSwitch);
+			case CROSS_LINE:
+				m_autonomousCommand = new AUTO_CrossLine();
+				break;
+				
+			case RIGHT_POSITION:
+				m_autonomousCommand = new AUTO_RightPosition(gameData);
+				break;
+				
+			case CENTER_POSITION:
+				m_autonomousCommand = new AUTO_CenterPosition(gameData);
+				break;
+				
+			case LEFT_POSITION:
+				m_autonomousCommand = new AUTO_LeftPosition(gameData);
+				break;
+				
+			case DEFAULT:
+			default:
+				m_autonomousCommand = new AUTO_Default();
+			}
+		}
+		
+		else {
+			m_autonomousCommand = new AUTO_Default();
+		}
+		
+		crossCheckbox = CrossCheckbox.getSelected();
+		/*
+		 * String autoSelected = SmartDashboard.getString("Auto Selector",
+		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
+		 * = new MyAutoCommand(); break; case "Default Auto": default:
+		 * autonomousCommand = new ExampleCommand(); break; }
+		 */
 
-//		// schedule the autonomous command (example)
-//		if (m_autonomousCommand != null) {
-//			m_autonomousCommand.start();
-//		} else {
-//			m_autonomousCommand = new AUTO_CrossLine();
-//			m_autonomousCommand.start();
-//		}
-		
-		
-		m_autonomousCommand = new AUTO_CrossLine();
-		m_autonomousCommand.start();
+		// schedule the autonomous command (example)
+		if (m_autonomousCommand != null) {
+			m_autonomousCommand.start();
+		}
 	}
 
 	/**
@@ -147,7 +162,11 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		
+		
 		Robot.drivetrainSubsystem.EncReset();
+		Robot.drivetrainSubsystem.ConifgMagEncoder();
+		Robot.drivetrainSubsystem.GyroReset();
+
 	
 		
 	}
@@ -169,7 +188,7 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 	}
 	
-	public void updateGameData(boolean retry){
+	/*public void updateGameData(boolean retry){
 		String data = DriverStation.getInstance().getGameSpecificMessage();
 		if(retry) {
 			int retries = 50;
@@ -187,17 +206,8 @@ public class Robot extends TimedRobot {
 	        }
 		}
 
-		if(data.length() > 0){
-			weOwnLeftSideNearSwitch = data.charAt(0) == 'L';
-			weOwnLeftSideScale = data.charAt(1) == 'L';
-			weOwnLeftSideFarSwitch = data.charAt(2) == 'L';
-
-			SmartDashboard.putBoolean("leftSwitchNear", weOwnLeftSideNearSwitch);
-			SmartDashboard.putBoolean("leftScale", weOwnLeftSideScale);
-			SmartDashboard.putBoolean("leftSwitchFar", weOwnLeftSideFarSwitch);
-		}
 	}
-	
+	*/
 	public void debug() {
 		SmartDashboard.putNumber("! GYRO ", robotmap.gyro.getAngle());
 		SmartDashboard.putNumber("! Encoders", drivetrainSubsystem.CurrentEncoderPositionInchesAverage());

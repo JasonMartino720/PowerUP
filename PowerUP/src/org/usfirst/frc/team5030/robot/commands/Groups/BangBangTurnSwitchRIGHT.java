@@ -1,7 +1,7 @@
-package org.usfirst.frc.team2791.robot.commands.auto;
+package org.usfirst.frc.team5030.robot.commands.Groups;
 
-import org.usfirst.frc.team2791.robot.commands.auto.bangbang.DriveEncoderBangBang;
-import org.usfirst.frc.team2791.robot.commands.auto.bangbang.TurnGyroBangBang;
+import org.usfirst.frc.team5030.robot.DriveEncoderBangBang;
+import org.usfirst.frc.team5030.robot.TurnToAngle;
 import org.usfirst.frc.team5030.robot.commands.LiftDeadRockon;
 import org.usfirst.frc.team5030.robot.commands.PlaceCube;
 
@@ -36,7 +36,7 @@ public class BangBangTurnSwitchRIGHT extends CommandGroup {
     	// NOTE. ALl bang bang distances have a little removed to compensate for overshoot.
     	addSequential(new DriveEncoderBangBang(0.3, 3*1.571, 100));
     	// turn towards the left side
-    	addSequential(new TurnGyroBangBang(60-10, 0.3, 100)); // want to turn 60 degrees 
+    	addSequential(new TurnToAngle(60-10, 0.3, 100)); // want to turn 60 degrees 
     	addParallel(new LiftDeadRockon(.3, 2));
     	// stop any momentum we have so the next drive start cleanly
 //    	addSequential(new PauseDrivetrain(0.5));
@@ -45,7 +45,7 @@ public class BangBangTurnSwitchRIGHT extends CommandGroup {
     	// stop any momentum we have so the next drive start cleanly
 //    	addSequential(new PauseDrivetrain(0.75));
     	// turn to face the switch
-    	addSequential(new TurnGyroBangBang(-(60-5), -0.35, 100)); // robot has more trouble turning counter clockwise
+    	addSequential(new TurnToAngle(-(60-5), -0.35, 100)); // robot has more trouble turning counter clockwise
     	// drive into the switch. Low power so we'll hit the wall and use the timeout to stop
     	addSequential(new DriveEncoderBangBang(0.4, 14*1.571, 3.5));
     	addSequential(new DriveEncoderBangBang(0.2, 14*1.571, 3.5));

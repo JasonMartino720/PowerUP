@@ -1,10 +1,11 @@
-package org.usfirst.frc.team2791.robot.commands.auto;
+package org.usfirst.frc.team5030.robot.commands.Groups;
 
-import org.usfirst.frc.team2791.robot.commands.auto.bangbang.DriveEncoderBangBang;
-import org.usfirst.frc.team2791.robot.commands.auto.bangbang.TurnGyroBangBang;
+import org.usfirst.frc.team5030.robot.DriveEncoderBangBang;
+import org.usfirst.frc.team5030.robot.TurnToAngle;
 import org.usfirst.frc.team5030.robot.commands.LiftDeadRockon;
 import org.usfirst.frc.team5030.robot.commands.PlaceCube;
 
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -37,16 +38,16 @@ public class BangBangTurnSwitchLEFT extends CommandGroup {
 
     	addSequential(new DriveEncoderBangBang(0.4, 3*3, 100));;
     	// turn towards the left side
-    	addSequential(new TurnGyroBangBang(-60, -0.3, 100));
+    	addSequential(new TurnToAngle(-60, -0.3, 100));
     	// drive towards the left side
     	addParallel(new LiftDeadRockon(.3, 2)); // was 13
     	addSequential(new DriveEncoderBangBang(0.4, 23*3, 100));
     	// turn to face the switch
-    	addSequential(new TurnGyroBangBang(60, 0.3, 100)); // there is only a weak drive after this turn so it overshoots more
+    	addSequential(new TurnToAngle(60, 0.3, 100)); // there is only a weak drive after this turn so it overshoots more
     	// drive into the switch. Low power so we'll hit the wall and use the timeout to stop
     	addSequential(new DriveEncoderBangBang(0.4, 10*3, 3.5));
     	addSequential(new DriveEncoderBangBang(0.2, 14*3, 3.5));
     	// score
-//    	addSequential(new PlaceCube());
+    	addSequential(new PlaceCube());
     }
 }

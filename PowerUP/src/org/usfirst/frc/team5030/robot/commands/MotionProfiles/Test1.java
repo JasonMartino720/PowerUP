@@ -1,7 +1,15 @@
 package org.usfirst.frc.team5030.robot.commands.MotionProfiles;
 
-public class Test1{
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+public class Test1 extends 	Command{
+
 	
+
 	public static int kNumPoints;
 	
 	// Position (rotations)	Velocity (RPM)	Duration (ms)
@@ -26,9 +34,19 @@ public class Test1{
 
 	};
 	
+	
 	public Test1()
 	{
 		this.kNumPoints = leftProfilePosition.length;	
+		
+		
+	}
+
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 

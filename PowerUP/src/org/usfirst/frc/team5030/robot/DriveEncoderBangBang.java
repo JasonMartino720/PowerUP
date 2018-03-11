@@ -1,6 +1,4 @@
-package org.usfirst.frc.team2791.robot.commands.auto.bangbang;
-
-import org.usfirst.frc.team5030.robot.Robot;
+package org.usfirst.frc.team5030.robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -25,14 +23,14 @@ public class DriveEncoderBangBang extends Command {
      * @param power
      * @param turn
      * @param distance
-     */
+     */               
     public DriveEncoderBangBang(double power,  double distance) {
     	requires(Robot.drivetrainSubsystem);
     	this.power = power;
     	distanceToDrive = distance;
     	
     	timeToDrive = 5.0;
-    }
+    }              
 
     protected void initialize() {
     	timer.start();

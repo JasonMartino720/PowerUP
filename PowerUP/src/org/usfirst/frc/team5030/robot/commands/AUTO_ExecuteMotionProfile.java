@@ -55,14 +55,14 @@ public class AUTO_ExecuteMotionProfile extends Command {
 			double RV = Test1.rightProfileVelocity[i];
 			
 			
-			
-			/* for each point, fill our structure and pass it to API 
+			/*
+			// for each point, fill our structure and pass it to API 
 			LPoint.position = LPos * Robot.drivetrainSubsystem.kSensorUnitsPerRotation; //Convert Revolutions to Units
 			RPoint.position = RPos * Robot.drivetrainSubsystem.kSensorUnitsPerRotation; //Convert Revolutions to Units
 			
 			LPoint.velocity = LV * Robot.drivetrainSubsystem.kSensorUnitsPerRotation / 600.0; //Convert RPM to Units/100ms
 			RPoint.velocity = RV * Robot.drivetrainSubsystem.kSensorUnitsPerRotation / 600.0;
-			*/
+			
 			
 			//point.profileSlotSelect0 = 0; /* which set of gains would you like to use [0,3]? */
 			//point.profileSlotSelect1 = 0; /* future feature  - not used in this example - cascaded PID [0,1], leave zero */

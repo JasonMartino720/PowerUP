@@ -22,9 +22,6 @@ public class AUTO_CenterPosition extends CommandGroup {
 
 		case 'L':
 			addSequential(new TurnToAngle(-10, 0.5), 1);
-			addSequential(new AutoDriveDistance(85, 0.65), 5);
-			addSequential(new TurnToAngle(0, 0.5), 1);
-			addSequential(new PlaceCube(), 0.5);
 			break;
 
 		case 'R':
