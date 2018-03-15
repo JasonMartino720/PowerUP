@@ -8,25 +8,34 @@ public class TimedTurn extends Command {
 	private boolean Finished = false;
 	private double speed;
 	private double time;
+	private Timer timer = new Timer();
 	
 	public TimedTurn(double Speed, double Time)
 	{
 		speed = Speed;
 		time = Time;
+		
 	}
 
 	protected void initialize()
 	{
 		requires(Robot.drivetrainSubsystem);
+		timer.reset();
+		timer.start();
 		
 	}
 	
 	protected void execute()
 	{
-		Robot.drivetrainSubsystem.ArcadeDrive(0, speed);
-		Timer.delay(time);
-		Finished = true;
-		
+		if(timer.get() < time)
+		{	
+			Robot.drivetrainSubsystem.ArcadeDrive(0, speed);
+			Finished = false;
+		}
+		else
+		{
+			Finished = true;
+		} 
 	}
 	
 	protected boolean isFinished() {

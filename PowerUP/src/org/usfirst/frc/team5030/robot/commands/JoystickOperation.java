@@ -32,7 +32,7 @@ public class JoystickOperation extends Command {
     protected void execute() {
     	//call the necessary joystick inputs
     	throttle = Robot.oi.driver.getY();
-    	rotation = Robot.oi.driver.getX();
+    	rotation = Robot.oi.driver.getRawAxis(4);
     	
     	//pass values back to UserDrive Method of Drivetrian subsystem
     	

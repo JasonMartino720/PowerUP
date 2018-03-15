@@ -40,7 +40,6 @@ public class OI
 		IntakeOut.whileHeld(new IntakeState());
 		IntakeOut.whenReleased(new IntakeOff());
 		operatorLT.whenPressed(new IntakeStartingPosition());
-		//operatorLT.whenReleased(new IntakeState());
 		operatorRT.whenPressed(new IntakeOutwardPosition());	
 		
 		//DPAD Binding for Elevator

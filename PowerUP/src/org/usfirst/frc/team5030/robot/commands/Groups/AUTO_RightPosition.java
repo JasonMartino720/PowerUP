@@ -24,7 +24,7 @@ public class AUTO_RightPosition extends CommandGroup {
 			if (Robot.crossCheckbox)
 			{
 				addSequential(new TurnToAngle(-15, 0.5), 1);
-				addSequential(new AutoDriveDistance(100, 0.65), 5);
+				addSequential(new AutoDriveDistance(100, 0.65, 0), 5);
 				addSequential(new TurnToAngle(0, 0.5), 1);
 				addSequential(new PlaceCube(), 0.5);
 
@@ -36,7 +36,7 @@ public class AUTO_RightPosition extends CommandGroup {
 			break;
 
 		case 'R':
-			addSequential(new AutoDriveDistance(125, 0.65), 6);
+			addSequential(new AutoDriveDistance(125, 0.65, 0), 6);
 			addSequential(new PlaceCube(), 0.5);
 			break;
 

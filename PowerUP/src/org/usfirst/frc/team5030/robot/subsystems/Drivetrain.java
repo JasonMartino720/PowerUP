@@ -24,6 +24,8 @@ public class Drivetrain extends Subsystem
 	
 	SpeedControllerGroup leftDrive = new SpeedControllerGroup(Robot.robotmap.FL, Robot.robotmap.BL);
 	SpeedControllerGroup rightDrive = new SpeedControllerGroup(Robot.robotmap.FR, Robot.robotmap.BR);
+	
+	BaseMotorController[] SCS = new BaseMotorController[] {Robot.robotmap.FR, Robot.robotmap.FL, Robot.robotmap.BR, Robot.robotmap.BL};
 
 	private double deadband = 0.025;
 	
@@ -84,13 +86,14 @@ public class Drivetrain extends Subsystem
     
     public double CurrentEncoderPositionAverage()
     {
-    	return (((Robot.robotmap.FL.getSelectedSensorPosition(1/1024) + Robot.robotmap.FR.getSelectedSensorPosition(1/1024)) / 2));
+    	return (((Robot.robotmap.FL.getSelectedSensorPosition(0) + Robot.robotmap.FR.getSelectedSensorPosition(0)) / 2));
     }
     
     public double CurrentEncoderPositionInchesAverage()
     {
-    	return ((Robot.robotmap.FL.getSelectedSensorPosition(1/1024) * AutoDriveDistance.kEncoderConversion));
+    	return (this.CurrentEncoderPositionAverage() * Robot.kEncoderConversion);
     }
+    
     
     public Drivetrain()
     {
@@ -103,12 +106,12 @@ public class Drivetrain extends Subsystem
     	drive.setDeadband(this.deadband);
     	drive.setExpiration(0.1);
     
-    	BaseMotorController[] SCS = new BaseMotorController[] {Robot.robotmap.FR, Robot.robotmap.FL, Robot.robotmap.BR, Robot.robotmap.BL};
+    	//BaseMotorController[] SCS = new BaseMotorController[] {Robot.robotmap.FR, Robot.robotmap.FL, Robot.robotmap.BR, Robot.robotmap.BL};
 		
 		for(int i = 0; i < SCS .length; i++) {
 			SCS[i].enableVoltageCompensation(true);
 			SCS[i].configVoltageCompSaturation(12, 20);
-			SCS[i].configOpenloopRamp(0.5, 3);
+			SCS[i].configOpenloopRamp(0.5, 10);
 		}
     }
 }

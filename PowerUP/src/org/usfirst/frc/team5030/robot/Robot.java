@@ -17,6 +17,8 @@ import org.usfirst.frc.team5030.robot.subsystems.*;
 
 public class Robot extends TimedRobot {
 	
+	public static double kEncoderConversion = ((6*Math.PI) / 4100);
+	
 	public static boolean crossCheckbox;
 	
 	public static String receivedGameData;
@@ -97,6 +99,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		
+		Robot.drivetrainSubsystem.EncReset();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		if (gameData != null && gameData.length() == 3) {
@@ -162,13 +165,9 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		
-		
 		Robot.drivetrainSubsystem.EncReset();
-		Robot.drivetrainSubsystem.ConifgMagEncoder();
 		Robot.drivetrainSubsystem.GyroReset();
-
 	
-		
 	}
 
 	/**
@@ -209,7 +208,8 @@ public class Robot extends TimedRobot {
 	}
 	*/
 	public void debug() {
-		SmartDashboard.putNumber("! GYRO ", robotmap.gyro.getAngle());
-		SmartDashboard.putNumber("! Encoders", drivetrainSubsystem.CurrentEncoderPositionInchesAverage());
+		SmartDashboard.putNumber("Right Encoder", robotmap.FR.getSelectedSensorPosition(0) * this.kEncoderConversion);
+		SmartDashboard.putNumber("Left Encoder" , robotmap.FL.getSelectedSensorPosition(0) * this.kEncoderConversion);
+	
 	}
 }
