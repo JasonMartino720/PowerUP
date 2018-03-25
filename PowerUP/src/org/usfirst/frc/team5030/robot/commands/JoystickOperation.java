@@ -32,18 +32,18 @@ public class JoystickOperation extends Command {
     protected void execute() {
     	//call the necessary joystick inputs
     	throttle = Robot.oi.driver.getY();
-    	rotation = Robot.oi.driver.getRawAxis(4);
+    	rotation = Robot.oi.driver.getX();
     	
     	//pass values back to UserDrive Method of Drivetrian subsystem
     	
     	if(Robot.oi.rbbutton.get())
     	{
-    		Robot.drivetrainSubsystem.ArcadeDrive(throttle * 0.75, rotation * 0.75);
+    		Robot.drivetrainSubsystem.ArcadeDrive(throttle * 0.75, rotation * 0.5);
     		
     	}
     	else
     	{
-    		Robot.drivetrainSubsystem.ArcadeDrive(throttle , rotation);
+    		Robot.drivetrainSubsystem.ArcadeDrive(Math.pow(throttle, 2) * Math.signum(throttle) , Math.pow(rotation , 2) * Math.signum(rotation) * 0.75);
     	}
     	
     }

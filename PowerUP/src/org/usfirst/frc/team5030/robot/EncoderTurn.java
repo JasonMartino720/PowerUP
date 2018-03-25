@@ -70,8 +70,4 @@ public class EncoderTurn extends Command {
 		Robot.drivetrainSubsystem.AllStop();
 	}
 	
-	
-
-	
-	
 }

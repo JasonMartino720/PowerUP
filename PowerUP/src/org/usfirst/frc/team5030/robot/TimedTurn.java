@@ -19,7 +19,6 @@ public class TimedTurn extends Command {
 
 	protected void initialize()
 	{
-		requires(Robot.drivetrainSubsystem);
 		timer.reset();
 		timer.start();
 		
@@ -46,6 +45,7 @@ public class TimedTurn extends Command {
 	protected void end()
 	{
 		Robot.drivetrainSubsystem.AllStop();
+		Robot.drivetrainSubsystem.EncReset();
 	}
 
 	protected void interrupted()

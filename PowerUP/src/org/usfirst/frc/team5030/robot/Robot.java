@@ -167,6 +167,7 @@ public class Robot extends TimedRobot {
 		
 		Robot.drivetrainSubsystem.EncReset();
 		Robot.drivetrainSubsystem.GyroReset();
+		Robot.elevatorSubsystem.elevatorEncoderReset();
 	
 	}
 
@@ -210,6 +211,7 @@ public class Robot extends TimedRobot {
 	public void debug() {
 		SmartDashboard.putNumber("Right Encoder", robotmap.FR.getSelectedSensorPosition(0) * this.kEncoderConversion);
 		SmartDashboard.putNumber("Left Encoder" , robotmap.FL.getSelectedSensorPosition(0) * this.kEncoderConversion);
+		SmartDashboard.putNumber("Elevator Encoder", this.elevatorSubsystem.getPosition()); 
 	
 	}
 }

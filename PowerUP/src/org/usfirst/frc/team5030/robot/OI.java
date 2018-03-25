@@ -28,6 +28,8 @@ public class OI
 		public JoystickButton climb = new JoystickButton(operator, 7); //Back Button
 		public Button operatorPOVLeft = new DPad(operator, 270); //Left on the DPad used for Scale
 		public Button operatorPOVRight = new DPad(operator, 90); //Right on the DPAD used for Switch
+		public Button operatorPOVUp = new DPad(operator, 0); //Up on the DPad used for Scale
+		public Button operatorPOVDown = new DPad(operator, 180); //Down on the DPAD used for Switch
 		public Button operatorRT = new TriggerButton(operator, this.RT, .2);
 		public Button operatorLT = new TriggerButton(operator, this.LT, .2);
 		
@@ -45,6 +47,8 @@ public class OI
 		//DPAD Binding for Elevator
 		operatorPOVLeft.whileHeld(new ElevatorSetPosition());
 		operatorPOVRight.whileHeld(new ElevatorSetPosition());
+		operatorPOVUp.whileHeld(new ElevatorSetPosition());
+		operatorPOVDown.whileHeld(new ElevatorSetPosition());
 
 		//Climber Binding
 		climb.whileHeld(new ClimberState());

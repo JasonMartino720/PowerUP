@@ -26,7 +26,7 @@ public class ElevatorSetPosition extends Command {
     	//Get POV from operator and send it to chooseHallEffect method
     	operatorPOV = Robot.oi.operator.getPOV();
     	
-    	Robot.elevatorSubsystem.chooseHallEffect(operatorPOV);
+    	Robot.elevatorSubsystem.overPosition(operatorPOV);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,7 +39,7 @@ public class ElevatorSetPosition extends Command {
     	}
         else
         {
-        	return false;
+        	return Robot.elevatorSubsystem.overHeight;
         }
     }
 

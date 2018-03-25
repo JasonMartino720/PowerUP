@@ -2,6 +2,10 @@ package org.usfirst.frc.team5030.robot.subsystems;
 
 import org.usfirst.frc.team5030.robot.Robot;
 import org.usfirst.frc.team5030.robot.commands.*;
+
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 //TODO input top limit on operatorControl using Robot.robotmap.topHeight
@@ -10,61 +14,87 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Elevator extends Subsystem {
 
 	private int operatorSetpoint;
-	private boolean decidedPosition;
+	private int parsedSetpoint;
+	public static boolean overHeight;
+	
+	//public static final int StartingHeight = 1000;
+	public static final int SwitchHeight = 7000;
+	public static final int ScaleHeight = 3000;
+	
+	SpeedControllerGroup elevatorGroup = new SpeedControllerGroup(Robot.robotmap.elevatorWinch, Robot.robotmap.elevatorWinch2);
+	
 	
 	public void operatorControl(double speed)
 	{
 		if(Math.abs(speed) > 0.1)
 		{
-			Robot.robotmap.elevatorWinch.set(speed);
+			this.elevatorGroup.set(-speed);
 		}
 		else
 		{
-			Robot.robotmap.elevatorWinch.set(0.0);
+			this.elevatorGroup.set(0.0);
 		}
-	
+		
+		if(!Robot.robotmap.ElevatorBottomSwitch.get())
+		{
+			this.elevatorEncoderReset();
+		}
 	}
 
-	public void chooseHallEffect(int operatorPOV)
+	public void overPosition(int operatorPOV)
 	{
-		/*
+		
 		//Receive POV value and turn it into number 0-3 or -1
 		//NOTE: When DPAd is not pressed value = -1
-		operatorSetpoint = operatorPOV / 90;
-		
-		if(operatorSetpoint == -1)
+		if(operatorSetpoint >= 0)
 		{
-			Robot.robotmap.elevatorWinch.set(0.0);
+			parsedSetpoint = operatorPOV / 90;
 		}
 		else
-		{	
-			switch(operatorSetpoint)
+		{
+			parsedSetpoint = operatorSetpoint;
+		}
+		
+			switch(parsedSetpoint)
 			{
 				case 0:
-				decidedPosition = Robot.robotmap.switchHeight.get();
-				this.elevatorToPosition(decidedPosition);
+					if(this.getPosition() < this.SwitchHeight)
+					{
+						this.operatorControl(-0.75);
+					}
+					else
+					{
+						this.operatorControl(0.0);
+						overHeight = true;
+					}
 				break;
 				
 				case 1:
-				decidedPosition = Robot.robotmap.scaleHeight.get();
-				this.elevatorToPosition(decidedPosition);
-				break; 
+					if(this.getPosition() < this.ScaleHeight)
+					{
+						this.operatorControl(-1.0);
+					}
+					else
+					{
+						this.operatorControl(0.0);
+						overHeight = true;
+					}	
+				break;
+				
+				case -1:
+				default:
+					this.operatorControl(0.0);
+					overHeight = true;
+				break;
+				
 			}
 		}
-	*/					
-	}
+						
 	
-	public void elevatorToPosition(boolean decidedPosition)
+	
+	public double getPosition()
 	{
-		/*if(!decidedPosition)
-		{
-			Robot.robotmap.elevatorWinch.set(1.0);
-		}
-		else
-		{
-			Robot.robotmap.elevatorWinch.set(0.0);
-		}
-		*/
+		return Robot.robotmap.elevatorWinch.getSelectedSensorPosition(0);
 	}
 	
 	public void elevatorStop()
@@ -72,10 +102,17 @@ public class Elevator extends Subsystem {
 		Robot.robotmap.elevatorWinch.set(0.0);
 	}
 	
+	public void elevatorEncoderReset()
+	{
+		Robot.robotmap.elevatorWinch.setSelectedSensorPosition(0, 0, 5);
+	}
+	
 	public Elevator()
 	{
-		Robot.robotmap.climber.setInverted(true);
-		Robot.robotmap.climber.enableDeadbandElimination(true);
+		Robot.robotmap.elevatorWinch.setInverted(false);
+		Robot.robotmap.elevatorWinch2.follow(Robot.robotmap.elevatorWinch);
+		
+		Robot.robotmap.elevatorWinch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 5);
 	}
 	
 	public void initDefaultCommand() {

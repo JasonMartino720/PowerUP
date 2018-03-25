@@ -38,12 +38,12 @@ public class AutoDriveDistance extends Command
     	System.out.println("CurrentEncAvg " + Robot.drivetrainSubsystem.CurrentEncoderPositionInchesAverage());
     	System.out.println("Target Distance " + EncoderDrivingDistance);
     	  	
-    	error = EncoderDrivingDistance - Robot.drivetrainSubsystem.CurrentEncoderPositionAverage();
-    	setSpeed = error / (kP / Math.abs(speed));
+    	//error = EncoderDrivingDistance - Robot.drivetrainSubsystem.CurrentEncoderPositionAverage();
+    	//setSpeed = speed;
     	
     	if(Robot.drivetrainSubsystem.CurrentEncoderPositionInchesAverage() < EncoderDrivingDistance)
     	{
-    		Robot.drivetrainSubsystem.ArcadeDrive(-setSpeed, rotation);
+    		Robot.drivetrainSubsystem.ArcadeDrive(-speed, rotation);
     		DrivingFinished = false;
     	}
     	else
@@ -61,6 +61,11 @@ public class AutoDriveDistance extends Command
 	protected void end()
 	{
 		Robot.drivetrainSubsystem.AllStop();
+	}
+	
+	protected void interrupted()
+	{
+		this.end();
 	}
 	
 }

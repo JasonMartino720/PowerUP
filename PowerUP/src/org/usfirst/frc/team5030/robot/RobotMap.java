@@ -30,6 +30,8 @@ public class RobotMap
 	
 	public WPI_TalonSRX elevatorWinch;
 	
+	public WPI_TalonSRX elevatorWinch2;
+	
 	//Instantiate Sparks and assign PWM Ports
 	public Spark leftGripper = new Spark(1);
 	
@@ -39,14 +41,14 @@ public class RobotMap
 	public VictorSP climber = new VictorSP(0);
 	
 	//Instantiate and Assign Double Solenoid
-	public DoubleSolenoid intakeSolenoid = new DoubleSolenoid(0,1);
+	//public DoubleSolenoid intakeSolenoid = new DoubleSolenoid(0,1);
 	
 	public DoubleSolenoid climberReleaseSolenoid = new DoubleSolenoid(2,3);
 	
 	//Instantiate Hall Effect Sensors and assign PWM
-	public DigitalInput switchHeight = new DigitalInput(7);	
-	public DigitalInput scaleHeight = new DigitalInput(8);
-	public DigitalInput maxHeight = new DigitalInput(9);
+	public DigitalInput ElevatorBottomSwitch = new DigitalInput(1);
+	
+	
 
 	public AnalogGyro gyro = new AnalogGyro(0);
 	
@@ -60,10 +62,11 @@ public class RobotMap
 		FR = new WPI_TalonSRX(2);
 		BR = new WPI_TalonSRX(3);
 		
-		leftCompliantArm = new WPI_TalonSRX(4);
-		rightCompliantArm = new WPI_TalonSRX(5);
+		//leftCompliantArm = new WPI_TalonSRX(4);
+		//rightCompliantArm = new WPI_TalonSRX(5);
 		
-		elevatorWinch = new WPI_TalonSRX(6);
+		elevatorWinch = new WPI_TalonSRX(4); //6
+		elevatorWinch2 = new WPI_TalonSRX(6); 
 		
 		FL.setSensorPhase(false);
 		FR.setSensorPhase(true);

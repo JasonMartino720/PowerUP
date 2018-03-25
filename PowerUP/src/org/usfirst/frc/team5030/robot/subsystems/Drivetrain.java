@@ -100,6 +100,9 @@ public class Drivetrain extends Subsystem
     	Robot.robotmap.FL.setSensorPhase(true);
     	Robot.robotmap.FR.setSensorPhase(false);
     	
+    	Robot.robotmap.BR.follow(Robot.robotmap.FR);
+    	Robot.robotmap.BL.follow(Robot.robotmap.FL);
+    	
     	this.ConifgMagEncoder();
     	
     	drive = new DifferentialDrive(leftDrive, rightDrive);
@@ -109,9 +112,9 @@ public class Drivetrain extends Subsystem
     	//BaseMotorController[] SCS = new BaseMotorController[] {Robot.robotmap.FR, Robot.robotmap.FL, Robot.robotmap.BR, Robot.robotmap.BL};
 		
 		for(int i = 0; i < SCS .length; i++) {
-			SCS[i].enableVoltageCompensation(true);
+			SCS[i].enableVoltageCompensation(false);
 			SCS[i].configVoltageCompSaturation(12, 20);
-			SCS[i].configOpenloopRamp(0.5, 10);
+			SCS[i].configOpenloopRamp(0.35, 5);
 		}
     }
 }

@@ -23,7 +23,7 @@ public class AUTO_CrossLine extends Command {
     protected void initialize() {
     	Robot.drivetrainSubsystem.EncReset();
     	Robot.drivetrainSubsystem.ConifgMagEncoder();
-    	Robot.intakeSubsytem.intakeOutPosition();
+    	//Robot.intakeSubsytem.intakeOutPosition();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,13 +34,13 @@ public class AUTO_CrossLine extends Command {
     	}
     	else
     	{
-    		Robot.drivetrainSubsystem.ArcadeDrive(-0.5, 0.0);
+    		Robot.drivetrainSubsystem.ArcadeDrive(-0.6, 0.1);
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(timeSinceInitialized() < (delay + 7))
+        if(timeSinceInitialized() < (delay + 4.5))
         {
         	return false;
         }
