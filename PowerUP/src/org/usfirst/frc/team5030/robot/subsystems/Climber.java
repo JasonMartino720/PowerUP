@@ -2,6 +2,7 @@ package org.usfirst.frc.team5030.robot.subsystems;
 
 import org.usfirst.frc.team5030.robot.Robot;
 import org.usfirst.frc.team5030.robot.commands.*;
+import org.usfirst.frc.team5030.robot.commands.Climber.ClimberOff;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,16 +22,14 @@ public class Climber extends Subsystem {
 
     public void DeployClimbingRamps()
     {
-    	Robot.robotmap.climberReleaseSolenoid.set(Value.kReverse);
+    
     }
     
     public Climber()
     {
     	Robot.robotmap.climber.setInverted(false);
-    	Robot.robotmap.climberReleaseSolenoid.set(Value.kForward);
+    	
     }
-    
-    
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

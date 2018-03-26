@@ -2,6 +2,14 @@ package org.usfirst.frc.team5030.robot;
 
 //Import all commands for binding
 import org.usfirst.frc.team5030.robot.commands.*;
+import org.usfirst.frc.team5030.robot.commands.Climber.ClimberOff;
+import org.usfirst.frc.team5030.robot.commands.Climber.ClimberState;
+import org.usfirst.frc.team5030.robot.commands.Elevator.ElevatorSetPosition;
+import org.usfirst.frc.team5030.robot.commands.Intake.ClampCube;
+import org.usfirst.frc.team5030.robot.commands.Intake.IntakeCube;
+import org.usfirst.frc.team5030.robot.commands.Intake.IntakeOff;
+import org.usfirst.frc.team5030.robot.commands.Intake.IntakeOut;
+import org.usfirst.frc.team5030.robot.commands.Intake.IntakeOutwardPosition;
 //Import all subsytems
 import org.usfirst.frc.team5030.robot.subsystems.*;
 
@@ -37,12 +45,12 @@ public class OI
 	public OI()
 	{
 		//Intake Binding
-		IntakeIn.whileHeld(new IntakeState());
+		IntakeIn.whileHeld(new IntakeCube());
 		IntakeIn.whenReleased(new IntakeOff());
-		IntakeOut.whileHeld(new IntakeState());
+		IntakeOut.whileHeld(new IntakeOut());
 		IntakeOut.whenReleased(new IntakeOff());
-		operatorLT.whenPressed(new IntakeStartingPosition());
-		operatorRT.whenPressed(new IntakeOutwardPosition());	
+		operatorLT.whenPressed(new IntakeOutwardPosition());
+		operatorRT.whenPressed(new ClampCube());	
 		
 		//DPAD Binding for Elevator
 		operatorPOVLeft.whileHeld(new ElevatorSetPosition());

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5030.robot.commands;
+package org.usfirst.frc.team5030.robot.commands.Intake;
 
 import org.usfirst.frc.team5030.robot.Robot;
 
@@ -7,21 +7,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class IntakeOff extends Command {
+public class IntakeOut extends Command {
 
-    public IntakeOff() {
+    public IntakeOut() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.intakeSubsytem);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.intakeSubsytem.IntakeStop();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intakeSubsytem.IntakeStop();
+    	Robot.intakeSubsytem.IntakeOut();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,6 +36,6 @@ public class IntakeOff extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.intakeSubsytem.IntakeStop();
+    	end();
     }
 }

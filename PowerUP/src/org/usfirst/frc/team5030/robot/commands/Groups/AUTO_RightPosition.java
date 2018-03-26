@@ -2,12 +2,11 @@ package org.usfirst.frc.team5030.robot.commands.Groups;
 
 import org.usfirst.frc.team5030.robot.AutoDriveDistance;
 import org.usfirst.frc.team5030.robot.AutoTimeDelay;
-import org.usfirst.frc.team5030.robot.EncoderTurn;
 import org.usfirst.frc.team5030.robot.Robot;
 import org.usfirst.frc.team5030.robot.TimedTurn;
 import org.usfirst.frc.team5030.robot.TurnToAngle;
 import org.usfirst.frc.team5030.robot.commands.AUTO_CrossLine;
-import org.usfirst.frc.team5030.robot.commands.PlaceCube;
+import org.usfirst.frc.team5030.robot.commands.Intake.PlaceCube;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -28,16 +27,7 @@ public class AUTO_RightPosition extends CommandGroup {
 			if (Robot.crossCheckbox)
 			{
 				System.out.println("Left Switch , Box Checked, Crossing");
-				
-				addSequential(new EncoderTurn(30, -0.5), 1);
-				Timer.delay(0.25);
-				addSequential(new AutoDriveDistance(100, 0.65, 0), 5);
-				Timer.delay(0.25);
-				addSequential(new EncoderTurn(30, 0.5), 1);
-				Timer.delay(0.25);
-				addSequential(new AutoDriveDistance(25 , 0.65 , 0));
-				Timer.delay(0.25);
-				addSequential(new PlaceCube(), 0.5);				
+						
 
 			}
 			else

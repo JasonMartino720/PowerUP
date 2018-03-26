@@ -1,17 +1,15 @@
-package org.usfirst.frc.team5030.robot.commands;
+package org.usfirst.frc.team5030.robot.commands.Elevator;
 
 import org.usfirst.frc.team5030.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class ClimberState extends Command {
+public class ElevatorOperation extends Command {
 
-    public ClimberState() {
+	private double speed;
+	
+    public ElevatorOperation() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.climberSubsytem);
+        requires(Robot.elevatorSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -19,15 +17,11 @@ public class ClimberState extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	if(Robot.oi.climb.get())
-    	{
-    		Robot.climberSubsytem.Climb();
-    	}
-    	else
-    	{
-    		Robot.climberSubsytem.ClimberStop();
-    	}
+    protected void execute() 
+    {
+    	speed = Robot.oi.operator.getY();
+    	
+    	Robot.elevatorSubsystem.operatorControl(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,12 +31,10 @@ public class ClimberState extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.climberSubsytem.ClimberStop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

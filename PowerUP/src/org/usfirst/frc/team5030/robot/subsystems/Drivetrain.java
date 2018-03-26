@@ -29,8 +29,7 @@ public class Drivetrain extends Subsystem
 
 	private double deadband = 0.025;
 	
-	
-	
+	private double[] ypr;
 	
 	//This method for driving during the teleop phase requires the two doubles provided by the JoystickOperation Command 
 	public void ArcadeDrive(double throttle, double rotation)
@@ -77,11 +76,16 @@ public class Drivetrain extends Subsystem
     	Robot.robotmap.FR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 5);
     }
   
-
-     
     public void GyroReset()
     {
-    	Robot.robotmap.gyro.reset();
+    	Robot.robotmap.IMU.setFusedHeading(0, 10);
+    	Robot.robotmap.IMU.setYaw(0, 10);
+    }
+    
+    public double getGyroAngle()
+    {
+    	Robot.robotmap.IMU.getYawPitchRoll(ypr);
+    	return ypr[0];
     }
     
     public double CurrentEncoderPositionAverage()

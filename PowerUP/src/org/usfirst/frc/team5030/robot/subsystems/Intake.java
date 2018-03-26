@@ -16,10 +16,6 @@ public class Intake extends Subsystem {
 	private SpeedControllerGroup Gripper_Group 
 		= new SpeedControllerGroup(Robot.robotmap.leftGripper, Robot.robotmap.rightGripper);
 	
-	/*private SpeedControllerGroup Compliant_Arm_Group 
-		= new SpeedControllerGroup(Robot.robotmap.leftCompliantArm, Robot.robotmap.rightCompliantArm);
-	*/
-	
 	private double Gripper_Intake_Speed = 0.5;
 	
 	public Intake()
@@ -28,8 +24,6 @@ public class Intake extends Subsystem {
 		
 		Robot.robotmap.leftGripper.setInverted(false);
 		Robot.robotmap.rightGripper.setInverted(false);
-		//Robot.robotmap.leftCompliantArm.setInverted(true);
-		//Robot.robotmap.rightCompliantArm.setInverted(true);
 	} 
 	
 	//Turn off both SpeedControllerGroups
@@ -45,15 +39,14 @@ public class Intake extends Subsystem {
     {
     	Robot.robotmap.leftGripper.set(-0.35);
     	Robot.robotmap.rightGripper.set(-0.4);
-    	//Robot.robotmap.leftCompliantArm.set(0.5);
-    	//Robot.robotmap.rightCompliantArm.set(0.45);
+    
     }
 
     //Intake outwards, used for when cube is on the ground still
     public void IntakeOut()
     {
     	this.Gripper_Group.set(0.5);
-    	//Compliant_Arm_Group.set(-0.5);
+   
     }
     
     //Place cube in Switch or scale
@@ -63,20 +56,33 @@ public class Intake extends Subsystem {
     	Robot.robotmap.leftGripper.set(1.0);
     	Robot.robotmap.rightGripper.set(1.0);
     }
- /*   
-    public void intakeStartPosition()
+ 
+    public void OpenPistons()
     {
-    	Robot.robotmap.intakeSolenoid.set(Value.kReverse);
+    	Robot.robotmap.intakeSolenoidLeft.set(Value.kForward);
+    	Robot.robotmap.intakeSolenoidRight.set(Value.kForward);
     }
     
-    public void intakeOutPosition()
+    public void ClampCube()
     {
-    	Robot.robotmap.intakeSolenoid.set(Value.kForward);
+    	Robot.robotmap.intakeSolenoidLeft.set(Value.kReverse);
+    	Robot.robotmap.intakeSolenoidRight.set(Value.kReverse);
     }
- */
+    
+    public void PistonNeutralPosition()
+    {
+    	Robot.robotmap.intakeSolenoidLeft.set(Value.kOff);
+    	Robot.robotmap.intakeSolenoidRight.set(Value.kOff);
+    }
+    
+    public boolean CubePresent()
+    {
+    	return Robot.robotmap.cubeSensor.get();
+    }
+    
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new IntakeState());
+        //setDefaultCommand();
     }
 }
 

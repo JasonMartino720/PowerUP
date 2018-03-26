@@ -1,9 +1,9 @@
 package org.usfirst.frc.team5030.robot.commands.Groups;
 
-import org.usfirst.frc.team5030.robot.DriveEncoderBangBang;
+//import org.usfirst.frc.team5030.robot.DriveEncoderBangBang;
 import org.usfirst.frc.team5030.robot.TurnToAngle;
-import org.usfirst.frc.team5030.robot.commands.LiftDeadRockon;
-import org.usfirst.frc.team5030.robot.commands.PlaceCube;
+import org.usfirst.frc.team5030.robot.commands.Elevator.LiftDeadRockon;
+import org.usfirst.frc.team5030.robot.commands.Intake.PlaceCube;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -35,7 +35,7 @@ public class BangBangTurnSwitchLEFT extends CommandGroup {
     	// 3rd arg is drive distance 
     	
     	// NOTE. ALl bang bang distances have a little removed to compensate for overshoot.
-
+/*
     	addSequential(new DriveEncoderBangBang(0.4, 3*3, 100));;
     	// turn towards the left side
     	addSequential(new TurnToAngle(-60, -0.3, 100));
@@ -49,5 +49,7 @@ public class BangBangTurnSwitchLEFT extends CommandGroup {
     	addSequential(new DriveEncoderBangBang(0.2, 14*3, 3.5));
     	// score
     	addSequential(new PlaceCube());
+    	
+    	*/
     }
 }

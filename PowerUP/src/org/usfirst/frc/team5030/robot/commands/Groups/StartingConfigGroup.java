@@ -9,7 +9,7 @@ public class StartingConfigGroup extends CommandGroup {
 
     public StartingConfigGroup() {
         
-    	addParallel(new IntakeStartingPosition());
+    	//addParallel(new I());
     	
     	
     }

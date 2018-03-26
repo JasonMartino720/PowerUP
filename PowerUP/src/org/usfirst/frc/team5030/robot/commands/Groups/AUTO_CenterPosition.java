@@ -2,11 +2,10 @@ package org.usfirst.frc.team5030.robot.commands.Groups;
 
 import org.usfirst.frc.team5030.robot.AutoDriveDistance;
 import org.usfirst.frc.team5030.robot.AutoTimeDelay;
-import org.usfirst.frc.team5030.robot.EncoderTurn;
 import org.usfirst.frc.team5030.robot.Robot;
 import org.usfirst.frc.team5030.robot.TimedTurn;
 import org.usfirst.frc.team5030.robot.TurnToAngle;
-import org.usfirst.frc.team5030.robot.commands.PlaceCube;
+import org.usfirst.frc.team5030.robot.commands.Intake.PlaceCube;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;

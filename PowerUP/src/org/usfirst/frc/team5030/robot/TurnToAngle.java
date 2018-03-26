@@ -30,7 +30,7 @@ public class TurnToAngle extends Command {
 	 * @param angle degrees that you want to turn  
 	 */
 	public TurnToAngle(double angle, double power) {
-		super("TurnGyro w/ BangBang");
+		super("TurnGyro");
 		requires(Robot.drivetrainSubsystem);
 		this.power = power;
 		amountToTurn = angle;
@@ -41,9 +41,8 @@ public class TurnToAngle extends Command {
 	protected void initialize() {
 		timer.reset();
 		timer.start();
-		stopAngle = Robot.robotmap.gyro.getAngle() + amountToTurn;
-		System.out.println("Starting gyro bang bang turn. power: "+power+"  Stop angle: "+stopAngle);
-//		System.out.println("Starting at distance: "+Robot.drivetrain.getAverageDist());
+		stopAngle = Robot.drivetrainSubsystem.getGyroAngle() + amountToTurn;
+		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -59,13 +58,13 @@ public class TurnToAngle extends Command {
 		}
 
 		if(power > 0) {
-			if(Robot.robotmap.gyro.getAngle() > stopAngle) {
-				System.out.println("Stopping at angle: "+Robot.robotmap.gyro.getAngle());
+			if(Robot.drivetrainSubsystem.getGyroAngle() > stopAngle) {
+				
 				return true;
 			}
 		} else {
-			if(Robot.robotmap.gyro.getAngle() < stopAngle) {
-				System.out.println("Stopping at angle: "+Robot.robotmap.gyro.getAngle());
+			if(Robot.drivetrainSubsystem.getGyroAngle() < stopAngle) {
+				
 				return true;
 			}
 		}

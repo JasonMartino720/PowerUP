@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
-
+import com.ctre.phoenix.sensors.PigeonIMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -40,21 +40,20 @@ public class RobotMap
 	//Instantiate VictorSP and assign PWM Port
 	public VictorSP climber = new VictorSP(0);
 	
-	//Instantiate and Assign Double Solenoid
-	//public DoubleSolenoid intakeSolenoid = new DoubleSolenoid(0,1);
+	//Instantiate and Assign Double Solenoids
+	public DoubleSolenoid intakeSolenoidLeft = new DoubleSolenoid(0,1);
 	
-	public DoubleSolenoid climberReleaseSolenoid = new DoubleSolenoid(2,3);
+	public DoubleSolenoid intakeSolenoidRight = new DoubleSolenoid(2,3);
 	
-	//Instantiate Hall Effect Sensors and assign PWM
+	//Instantiate Digital Sensors and assign PWM
 	public DigitalInput ElevatorBottomSwitch = new DigitalInput(1);
 	
+	public DigitalInput cubeSensor = new DigitalInput(0);
 	
-
-	public AnalogGyro gyro = new AnalogGyro(0);
+	public PigeonIMU IMU;
 	
 	public RobotMap()
 	{
-		gyro.calibrate();
 		//Assign Device ID's for Talon SRX's
 		
 		FL = new WPI_TalonSRX(0);
@@ -70,6 +69,8 @@ public class RobotMap
 		
 		FL.setSensorPhase(false);
 		FR.setSensorPhase(true);
+		
+		IMU = new PigeonIMU(BR); 
 	}
 	
 }

@@ -17,7 +17,7 @@ public class AutoDriveDistance extends Command
 	private double rotation;
 	private double leftEncPos;
 	private double rightEncPos;
-	private final double kP = 5;
+	private final double kP = 0.5;
 	
     public AutoDriveDistance(double distanceInches, double Speed , double Rotation)
     {
@@ -35,9 +35,7 @@ public class AutoDriveDistance extends Command
     {
     	leftEncPos = Robot.robotmap.FL.getSelectedSensorPosition(0);
     	rightEncPos = Robot.robotmap.FR.getSelectedSensorPosition(0);
-    	System.out.println("CurrentEncAvg " + Robot.drivetrainSubsystem.CurrentEncoderPositionInchesAverage());
-    	System.out.println("Target Distance " + EncoderDrivingDistance);
-    	  	
+    	    	  	
     	//error = EncoderDrivingDistance - Robot.drivetrainSubsystem.CurrentEncoderPositionAverage();
     	//setSpeed = speed;
     	

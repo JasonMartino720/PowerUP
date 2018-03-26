@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5030.robot;
+package org.usfirst.frc.team5030.robot.Enums;
 
 public enum AutoMode {
 	DEFAULT,

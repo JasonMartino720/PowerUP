@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team5030.robot.Enums.AutoMode;
 import org.usfirst.frc.team5030.robot.commands.*;
 import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_CenterPosition;
 import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_LeftPosition;
