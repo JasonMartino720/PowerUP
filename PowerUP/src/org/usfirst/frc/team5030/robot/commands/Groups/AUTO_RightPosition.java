@@ -25,6 +25,7 @@ public class AUTO_RightPosition extends CommandGroup {
 
 		switch (parsedGameData) {
 		case 'L':
+			System.out.println("Box " + Robot.crossCheckbox);
 			if (Robot.crossCheckbox)
 			{
 				System.out.println("Left Switch , Box Checked, Crossing");

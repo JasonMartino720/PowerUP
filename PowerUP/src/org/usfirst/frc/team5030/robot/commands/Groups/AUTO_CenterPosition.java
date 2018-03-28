@@ -38,11 +38,11 @@ public class AUTO_CenterPosition extends CommandGroup {
 				addSequential(new TurnToAngle(20 , 0.5));
 				addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 10));
 				//addSequential(new PlaceCube() , 0.5);
-				addSequential(new DriveDistanceMaintainHeader(30 , -0.65 , 10));
+				addSequential(new DriveDistanceMaintainHeader(22 , -0.65 , 10));
 				addSequential(new TurnToAngle(80 , 0.5));
-				addSequential(new DriveDistanceMaintainHeader(45 , 0.65 , 10));
+				addSequential(new DriveDistanceMaintainHeader(55 , 0.65 , 10));
 				//Intake
-				addSequential(new DriveDistanceMaintainHeader(55 , -0.65 , 10));
+				addSequential(new DriveDistanceMaintainHeader(45 , -0.65 , 10));
 				addSequential(new TurnToAngle(-80 , -0.5));
 				addSequential(new DriveDistanceMaintainHeader(35 , 0.65 , 10));
 			}
@@ -60,12 +60,35 @@ public class AUTO_CenterPosition extends CommandGroup {
 			break;
 
 		case 'R':
-			addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
-			addSequential(new TurnToAngle(15 , 0.5));
-			addSequential(new DriveDistanceMaintainHeader(90 , 0.65 , 10));
-			addSequential(new TurnToAngle(-25 , -0.5));
-			addSequential(new DriveDistanceMaintainHeader(15 , 0.65 , 10));
 			
+			if(Robot.twoCube)
+			{	
+				System.out.println("2 Cube");
+				
+				addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
+				addSequential(new TurnToAngle(15 , 0.5));
+				addSequential(new DriveDistanceMaintainHeader(90 , 0.65 , 10));
+				addSequential(new TurnToAngle(-25 , -0.5));
+				addSequential(new DriveDistanceMaintainHeader(15 , 0.65 , 10));
+				//addSequential(new PlaceCube() , 0.5);
+				addSequential(new DriveDistanceMaintainHeader(22 , -0.65 , 10));
+				addSequential(new TurnToAngle(-80 , -0.5));
+				addSequential(new DriveDistanceMaintainHeader(55 , 0.65 , 10));
+				//Intake
+				addSequential(new DriveDistanceMaintainHeader(45 , -0.65 , 10));
+				addSequential(new TurnToAngle(80 , 0.5));
+				addSequential(new DriveDistanceMaintainHeader(35 , 0.65 , 10));
+			}
+			else
+			{
+				
+				addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
+				addSequential(new TurnToAngle(15 , 0.5));
+				addSequential(new DriveDistanceMaintainHeader(90 , 0.65 , 10));
+				addSequential(new TurnToAngle(-25 , -0.5));
+				addSequential(new DriveDistanceMaintainHeader(15 , 0.65 , 10));
+				
+			}
 			break;
 
 		default:
