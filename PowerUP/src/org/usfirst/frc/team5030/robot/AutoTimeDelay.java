@@ -31,6 +31,8 @@ public class AutoTimeDelay extends Command {
 		{
 			finishedWaiting = true;
 		}
+		
+		System.out.println("Delaying");
 	}
 	
 	@Override

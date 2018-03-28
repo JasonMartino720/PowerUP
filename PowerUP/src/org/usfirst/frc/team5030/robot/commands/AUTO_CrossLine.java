@@ -34,7 +34,7 @@ public class AUTO_CrossLine extends Command {
     	}
     	else
     	{
-    		Robot.drivetrainSubsystem.ArcadeDrive(-0.6, 0.1);
+    		Robot.drivetrainSubsystem.ArcadeDrive(0.6, 0.1);
     	}
     }
 

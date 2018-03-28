@@ -58,12 +58,12 @@ public class TurnToAngle extends Command {
 		}
 
 		if(power > 0) {
-			if(Robot.drivetrainSubsystem.getGyroAngle() > stopAngle) {
+			if(Robot.drivetrainSubsystem.getGyroAngle() > stopAngle - 5) {
 				
 				return true;
 			}
 		} else {
-			if(Robot.drivetrainSubsystem.getGyroAngle() < stopAngle) {
+			if(Robot.drivetrainSubsystem.getGyroAngle() < stopAngle + 5) {
 				
 				return true;
 			}

@@ -40,21 +40,22 @@ public class DriveDistanceMaintainHeader extends Command {
     	
     	remainingDistance = targetDistance - currentDistance;
     	
-       	 if (currentAngle > startAngle + 2){
-       		 rotation = 0.3;
-       	 }else if (currentAngle > startAngle + 0.5){
-       		 rotation = 0.2;
-       	 }else if (currentAngle < startAngle - 0.5){
-       		 rotation = -0.2;
-       	 }else if (currentAngle < startAngle - 2){
-       		 rotation = -0.3;
+       	 if (currentAngle > startAngle + 15){
+       		 rotation = -0.25;
+       	 }else if (currentAngle > startAngle + 5){
+       		 rotation = -0.15;
+       	 }else if (currentAngle < startAngle - 5){
+       		 rotation = 0.15;
+       	 }else if (currentAngle < startAngle - 15){
+       		 rotation = 0.25;
        	 }else{
        		 rotation = 0;
        	 }	 
        	 
-       	 Robot.drivetrainSubsystem.ArcadeDrive(power, rotation);
+       	 Robot.drivetrainSubsystem.ArcadeDrive(power, 0);
        	 
        	System.out.println("Remaining Distance " + remainingDistance); 
+       	System.out.println("Rotation " + rotation);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -2,6 +2,7 @@ package org.usfirst.frc.team5030.robot.commands.Groups;
 
 import org.usfirst.frc.team5030.robot.AutoDriveDistance;
 import org.usfirst.frc.team5030.robot.AutoTimeDelay;
+import org.usfirst.frc.team5030.robot.DriveDistanceMaintainHeader;
 import org.usfirst.frc.team5030.robot.Robot;
 import org.usfirst.frc.team5030.robot.TimedTurn;
 import org.usfirst.frc.team5030.robot.TurnToAngle;
@@ -24,30 +25,34 @@ public class AUTO_RightPosition extends CommandGroup {
 
 		switch (parsedGameData) {
 		case 'L':
-			if (Robot.crossCheckbox)
-			{
+			/*if (Robot.crossCheckbox)
+			{*/
 				System.out.println("Left Switch , Box Checked, Crossing");
-						
+				addSequential(new DriveDistanceMaintainHeader(205 , 0.65 , 10));
+				addSequential(new TurnToAngle(-75 , -0.45));
+				addSequential(new AutoTimeDelay(0.25));
+				addSequential(new DriveDistanceMaintainHeader(155, 0.65 , 10));	
+				addSequential(new TurnToAngle(-70 , -0.5));
+				addSequential(new DriveDistanceMaintainHeader(35, 0.65 , 10));	
+				
 
-			}
+			/*}
 			else
 			{
 				System.out.println("Box Unchecked , Line Crossing ");
 				addSequential(new AUTO_CrossLine(), 14);
 			}
+			*/
 			break;
 
 		case 'R':
 			
 			System.out.println("Right Switch Lets Score");
 			
-			addSequential(new AUTO_CrossLine() , 3.5);
-			addSequential(new AutoTimeDelay(1));
-			addSequential(new TimedTurn(-0.6 , 0.8));
-			addSequential(new AutoTimeDelay(1));
-			addSequential(new AutoDriveDistance(15 , 0.55 , 0));
-			addSequential(new AutoTimeDelay(1));
-			addSequential(new PlaceCube(), 0.5);
+			addSequential(new DriveDistanceMaintainHeader(140 , 0.65 , 10));
+			addSequential(new TurnToAngle(-85 , -0.5));
+			addSequential(new DriveDistanceMaintainHeader(36, 0.65 , 10));
+			
 			break;
 
 			default:
