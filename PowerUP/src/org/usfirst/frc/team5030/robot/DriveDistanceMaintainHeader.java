@@ -53,7 +53,8 @@ public class DriveDistanceMaintainHeader extends Command {
        	 }	 
        	 
        	 Robot.drivetrainSubsystem.ArcadeDrive(power, 0);
-       	 
+       	
+       	System.out.println("current avg " + Robot.drivetrainSubsystem.CurrentEncoderPositionInchesAverage());
        	System.out.println("Remaining Distance " + remainingDistance); 
        	System.out.println("Rotation " + rotation);
     }

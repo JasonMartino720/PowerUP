@@ -27,11 +27,31 @@ public class AUTO_CenterPosition extends CommandGroup {
 
 		case 'L':
 			
+			/*
+			//SingleCube
 			addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
 			addSequential(new TurnToAngle(-15 , -0.5));
 			addSequential(new DriveDistanceMaintainHeader(87 , 0.65 , 10));
 			addSequential(new TurnToAngle(20 , 0.5));
 			addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 10));
+			*/
+			
+			addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
+			addSequential(new TurnToAngle(-20 , -0.5));
+			addSequential(new DriveDistanceMaintainHeader(90 , 0.65 , 10));
+			addSequential(new TurnToAngle(20 , 0.5));
+			addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 10));
+			//addSequential(new PlaceCube() , 0.5);
+			addSequential(new DriveDistanceMaintainHeader(30 , -0.65 , 10));
+			addSequential(new TurnToAngle(80 , 0.5));
+			addSequential(new DriveDistanceMaintainHeader(45 , 0.65 , 10));
+			//Intake
+			addSequential(new DriveDistanceMaintainHeader(55 , -0.65 , 10));
+			addSequential(new TurnToAngle(-80 , -0.5));
+			addSequential(new DriveDistanceMaintainHeader(35 , 0.65 , 10));
+			
+			
+			
 			break;
 
 		case 'R':
