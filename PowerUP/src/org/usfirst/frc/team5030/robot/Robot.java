@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
 	
 	public static double kEncoderConversion = ((6*Math.PI) / 4100);
 	
-	public static boolean crossCheckbox;
+	public static boolean crossCheckbox , twoCube;
 	
 	public static String receivedGameData;
 	
@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
 	SendableChooser<AutoMode> m_chooser = new SendableChooser<>();
 	SendableChooser<Boolean> CrossCheckbox = new SendableChooser<>();
+	SendableChooser<Boolean> TwoCube = new SendableChooser<>();
 	
 
 	/**
@@ -63,8 +64,12 @@ public class Robot extends TimedRobot {
 		CrossCheckbox.addDefault("NO", false);
 		CrossCheckbox.addObject("YES", true);
 		
+		TwoCube.addDefault("NO", false);
+		TwoCube.addObject("YES" , true);
+		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SmartDashboard.putData("Cross?" , CrossCheckbox);
+		SmartDashboard.putData("Two Cube???" , TwoCube);
 		
 		Robot.drivetrainSubsystem.EncReset();
 		Robot.drivetrainSubsystem.configIMU();
@@ -135,6 +140,7 @@ public class Robot extends TimedRobot {
 		}
 		
 		crossCheckbox = CrossCheckbox.getSelected();
+		twoCube = TwoCube.getSelected();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
