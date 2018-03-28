@@ -67,8 +67,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Cross?" , CrossCheckbox);
 		
 		Robot.drivetrainSubsystem.EncReset();
+		Robot.drivetrainSubsystem.configIMU();
 		Robot.drivetrainSubsystem.ConifgMagEncoder();
-		Robot.drivetrainSubsystem.GyroReset();
+	
 	} 
 
 	/**
@@ -146,7 +147,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.start();
 		}
 	}
-
+ 
 	/**
 	 * This function is called periodically during autonomous.
 	 */
@@ -168,7 +169,7 @@ public class Robot extends TimedRobot {
 		}
 		
 		Robot.drivetrainSubsystem.EncReset();
-		Robot.drivetrainSubsystem.GyroReset();
+		Robot.drivetrainSubsystem.configIMU();
 		Robot.elevatorSubsystem.elevatorEncoderReset();
 	
 	}
@@ -179,6 +180,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		System.out.println("Heading " + Robot.drivetrainSubsystem.getGyroAngle());
 		debug();
 			
 	}
@@ -188,6 +190,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		
 	}
 	
 	/*public void updateGameData(boolean retry){
@@ -210,10 +213,12 @@ public class Robot extends TimedRobot {
 
 	}
 	*/
+	
 	public void debug() {
 		SmartDashboard.putNumber("Right Encoder", robotmap.FR.getSelectedSensorPosition(0) * this.kEncoderConversion);
 		SmartDashboard.putNumber("Left Encoder" , robotmap.FL.getSelectedSensorPosition(0) * this.kEncoderConversion);
 		SmartDashboard.putNumber("Elevator Encoder", this.elevatorSubsystem.getPosition()); 
+		SmartDashboard.putNumber("Yaw" , this.drivetrainSubsystem.getGyroAngle());
 	
 	}
 }

@@ -67,10 +67,11 @@ public class RobotMap
 		elevatorWinch = new WPI_TalonSRX(4); //6
 		elevatorWinch2 = new WPI_TalonSRX(6); 
 		
+		IMU = new PigeonIMU(this.BR);
+		
 		FL.setSensorPhase(false);
 		FR.setSensorPhase(true);
 		
-		IMU = new PigeonIMU(BR); 
 	}
 	
 }

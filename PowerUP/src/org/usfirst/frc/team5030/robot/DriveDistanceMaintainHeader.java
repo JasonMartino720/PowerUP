@@ -26,7 +26,9 @@ public class DriveDistanceMaintainHeader extends Command {
     	startAngle = Robot.drivetrainSubsystem.getGyroAngle();
     	
     	Robot.drivetrainSubsystem.EncReset();
-    	Robot.drivetrainSubsystem.GyroReset();
+    	Robot.drivetrainSubsystem.configIMU();
+    
+    	System.out.println("Remaining Distance " + remainingDistance); 
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -35,6 +37,8 @@ public class DriveDistanceMaintainHeader extends Command {
     	currentAngle = Robot.drivetrainSubsystem.getGyroAngle();
     	
     	currentDistance = Robot.drivetrainSubsystem.CurrentEncoderPositionInchesAverage();
+    	
+    	remainingDistance = targetDistance - currentDistance;
     	
        	 if (currentAngle > startAngle + 2){
        		 rotation = 0.3;
@@ -49,12 +53,14 @@ public class DriveDistanceMaintainHeader extends Command {
        	 }	 
        	 
        	 Robot.drivetrainSubsystem.ArcadeDrive(power, rotation);
+       	 
+       	System.out.println("Remaining Distance " + remainingDistance); 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         
-    	return Math.abs(remainingDistance) < 5.0;
+    	return Math.abs(remainingDistance) < 10.0;
     }
 
     // Called once after isFinished returns true

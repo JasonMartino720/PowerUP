@@ -6,6 +6,7 @@ import org.usfirst.frc.team5030.robot.commands.JoystickOperation;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -27,14 +28,16 @@ public class Drivetrain extends Subsystem
 	
 	BaseMotorController[] SCS = new BaseMotorController[] {Robot.robotmap.FR, Robot.robotmap.FL, Robot.robotmap.BR, Robot.robotmap.BL};
 
-	private double deadband = 0.025;
+	public static PigeonIMU.FusionStatus fusionStatus;
 	
-	private double[] ypr;
+	private double deadband = 0.025;
+	public double currentAngle; 
+	//private double[] ypr;
 	
 	//This method for driving during the teleop phase requires the two doubles provided by the JoystickOperation Command 
 	public void ArcadeDrive(double throttle, double rotation)
 	{
-		drive.arcadeDrive(-throttle, rotation);
+		drive.arcadeDrive(throttle, rotation);
 	
 	}
 
@@ -76,16 +79,15 @@ public class Drivetrain extends Subsystem
     	Robot.robotmap.FR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 5);
     }
   
-    public void GyroReset()
+    public void configIMU()
     {
-    	Robot.robotmap.IMU.setFusedHeading(0, 10);
-    	Robot.robotmap.IMU.setYaw(0, 10);
+    	Robot.robotmap.IMU.setFusedHeading(0.0 , 10);
     }
     
     public double getGyroAngle()
     {
-    	Robot.robotmap.IMU.getYawPitchRoll(ypr);
-    	return ypr[0];
+    	Robot.robotmap.IMU.getFusedHeading(fusionStatus);
+    	return -fusionStatus.heading;
     }
     
     public double CurrentEncoderPositionAverage()
@@ -113,13 +115,15 @@ public class Drivetrain extends Subsystem
     	drive.setDeadband(this.deadband);
     	drive.setExpiration(0.1);
     
+    	fusionStatus = new PigeonIMU.FusionStatus();
+    	
     	//BaseMotorController[] SCS = new BaseMotorController[] {Robot.robotmap.FR, Robot.robotmap.FL, Robot.robotmap.BR, Robot.robotmap.BL};
 		
-		for(int i = 0; i < SCS .length; i++) {
+		/*for(int i = 0; i < SCS .length; i++) {
 			SCS[i].enableVoltageCompensation(false);
 			SCS[i].configVoltageCompSaturation(12, 20);
 			SCS[i].configOpenloopRamp(0.35, 5);
-		}
+		}*/
     }
 }
 
