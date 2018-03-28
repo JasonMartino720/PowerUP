@@ -64,8 +64,8 @@ public class Robot extends TimedRobot {
 		CrossCheckbox.addDefault("NO", false);
 		CrossCheckbox.addObject("YES", true);
 		
-		TwoCube.addDefault("NO", false);
-		TwoCube.addObject("YES" , true);
+		TwoCube.addDefault("Default", false);
+		TwoCube.addObject("2 Cube" , true);
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SmartDashboard.putData("Cross?" , CrossCheckbox);
@@ -109,6 +109,8 @@ public class Robot extends TimedRobot {
 		
 		Robot.drivetrainSubsystem.EncReset();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		crossCheckbox = CrossCheckbox.getSelected();
+		twoCube = TwoCube.getSelected();
 		
 		if (gameData != null && gameData.length() == 3) {
 			switch(m_chooser.getSelected()) {
@@ -139,8 +141,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new AUTO_Default();
 		}
 		
-		crossCheckbox = CrossCheckbox.getSelected();
-		twoCube = TwoCube.getSelected();
+		
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand

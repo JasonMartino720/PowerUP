@@ -27,23 +27,11 @@ public class AUTO_CenterPosition extends CommandGroup {
 		switch (parsedGameData) {
 
 		case 'L':
-			
-			System.out.println("Cross Checkbox " + Robot.crossCheckbox);
-			System.out.println("Two Cube " + Robot.twoCube);
-			
-			if(Robot.crossCheckbox)
-			{
-				
-				//SingleCube
-				addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
-				addSequential(new TurnToAngle(-15 , -0.5));
-				addSequential(new DriveDistanceMaintainHeader(87 , 0.65 , 10));
-				addSequential(new TurnToAngle(20 , 0.5));
-				addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 10));
-				
-			}
-			else if(Robot.twoCube)
+						
+			if(Robot.twoCube)
 			{	
+				System.out.println("2 Cube");
+				
 				addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
 				addSequential(new TurnToAngle(-20 , -0.5));
 				addSequential(new DriveDistanceMaintainHeader(90 , 0.65 , 10));
@@ -60,7 +48,14 @@ public class AUTO_CenterPosition extends CommandGroup {
 			}
 			else
 			{
-				addSequential(new AUTO_CrossLine());
+				System.out.println("Single Cube Left");
+				
+				addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
+				addSequential(new TurnToAngle(-15 , -0.5));
+				addSequential(new DriveDistanceMaintainHeader(87 , 0.65 , 10));
+				addSequential(new TurnToAngle(20 , 0.5));
+				addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 10));
+				
 			}
 			break;
 
