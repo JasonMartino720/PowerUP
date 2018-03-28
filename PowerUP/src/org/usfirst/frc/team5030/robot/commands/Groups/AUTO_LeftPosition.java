@@ -25,13 +25,20 @@ public class AUTO_LeftPosition extends CommandGroup {
 		switch (parsedGameData) {
 		case 'R':
 			System.out.println("Left Switch , Box Checked, Crossing");
+			if(Robot.crossCheckbox)
+			{
+				addSequential(new DriveDistanceMaintainHeader(205 , 0.65 , 10));
+				addSequential(new TurnToAngle(80 , 0.5));
+				addSequential(new AutoTimeDelay(0.25));
+				addSequential(new DriveDistanceMaintainHeader(155, 0.65 , 10));	
+				addSequential(new TurnToAngle(75 , 0.5));
+				addSequential(new DriveDistanceMaintainHeader(35, 0.65 , 10));	
+			}
+			else
+			{
+				addSequential(new AUTO_CrossLine(), 14.5);
+			}
 			
-			addSequential(new DriveDistanceMaintainHeader(205 , 0.65 , 10));
-			addSequential(new TurnToAngle(80 , 0.5));
-			addSequential(new AutoTimeDelay(0.25));
-			addSequential(new DriveDistanceMaintainHeader(155, 0.65 , 10));	
-			addSequential(new TurnToAngle(75 , 0.5));
-			addSequential(new DriveDistanceMaintainHeader(35, 0.65 , 10));	
 
 			break;
 

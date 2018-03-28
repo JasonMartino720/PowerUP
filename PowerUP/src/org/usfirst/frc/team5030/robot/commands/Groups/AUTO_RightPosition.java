@@ -25,8 +25,8 @@ public class AUTO_RightPosition extends CommandGroup {
 
 		switch (parsedGameData) {
 		case 'L':
-			/*if (Robot.crossCheckbox)
-			{*/
+			if (Robot.crossCheckbox)
+			{
 				System.out.println("Left Switch , Box Checked, Crossing");
 				addSequential(new DriveDistanceMaintainHeader(205 , 0.65 , 10));
 				addSequential(new TurnToAngle(-75 , -0.45));
@@ -36,13 +36,13 @@ public class AUTO_RightPosition extends CommandGroup {
 				addSequential(new DriveDistanceMaintainHeader(35, 0.65 , 10));	
 				
 
-			/*}
+			}
 			else
 			{
 				System.out.println("Box Unchecked , Line Crossing ");
 				addSequential(new AUTO_CrossLine(), 14);
 			}
-			*/
+			
 			break;
 
 		case 'R':
