@@ -34,13 +34,13 @@ public class AUTO_CrossLine extends Command {
     	}
     	else
     	{
-    		Robot.drivetrainSubsystem.ArcadeDrive(0.6, 0.1);
+    		Robot.drivetrainSubsystem.ArcadeDrive(0.55, 0.0);
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(timeSinceInitialized() < (delay + 4.5))
+        if(timeSinceInitialized() < (delay + 7))
         {
         	return false;
         }

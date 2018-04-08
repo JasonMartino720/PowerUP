@@ -7,6 +7,7 @@ import org.usfirst.frc.team5030.robot.commands.Climber.ClimberState;
 import org.usfirst.frc.team5030.robot.commands.Elevator.ElevatorSetPosition;
 import org.usfirst.frc.team5030.robot.commands.Intake.ClampCube;
 import org.usfirst.frc.team5030.robot.commands.Intake.IntakeCube;
+import org.usfirst.frc.team5030.robot.commands.Intake.IntakeNeutralPosition;
 import org.usfirst.frc.team5030.robot.commands.Intake.IntakeOff;
 import org.usfirst.frc.team5030.robot.commands.Intake.IntakeOut;
 import org.usfirst.frc.team5030.robot.commands.Intake.IntakeOutwardPosition;

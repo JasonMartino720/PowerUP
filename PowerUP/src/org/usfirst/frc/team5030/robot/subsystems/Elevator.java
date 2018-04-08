@@ -29,7 +29,7 @@ public class Elevator extends Subsystem {
 	{
 		if(Math.abs(speed) > 0.1)
 		{
-			this.elevatorGroup.set(-speed);
+			this.elevatorGroup.set(speed);
 		}
 		else
 		{

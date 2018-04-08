@@ -21,7 +21,7 @@ public class ElevatorOperation extends Command {
     {
     	speed = Robot.oi.operator.getY();
     	
-    	Robot.elevatorSubsystem.operatorControl(speed);
+    	Robot.elevatorSubsystem.operatorControl(-speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -7,6 +7,8 @@ import org.usfirst.frc.team5030.robot.Robot;
 import org.usfirst.frc.team5030.robot.TimedTurn;
 import org.usfirst.frc.team5030.robot.TurnToAngle;
 import org.usfirst.frc.team5030.robot.commands.AUTO_CrossLine;
+import org.usfirst.frc.team5030.robot.commands.Elevator.LiftDeadReckon;
+import org.usfirst.frc.team5030.robot.commands.Intake.AutoIntakeCube;
 import org.usfirst.frc.team5030.robot.commands.Intake.PlaceCube;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -32,29 +34,40 @@ public class AUTO_CenterPosition extends CommandGroup {
 			{	
 				System.out.println("2 Cube");
 				
+				/*addParallel(new LiftDeadReckon(0.5, 0.5));
 				addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
 				addSequential(new TurnToAngle(-20 , -0.5));
 				addSequential(new DriveDistanceMaintainHeader(90 , 0.65 , 10));
 				addSequential(new TurnToAngle(20 , 0.5));
-				addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 10));
-				//addSequential(new PlaceCube() , 0.5);
-				addSequential(new DriveDistanceMaintainHeader(22 , -0.65 , 10));
-				addSequential(new TurnToAngle(80 , 0.5));
-				addSequential(new DriveDistanceMaintainHeader(55 , 0.65 , 10));
+				addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 3) , 2);
+				addSequential(new PlaceCube(1.0));*/
+				addSequential(new CenterAuto_LeftDrive());
+				addParallel(new LiftDeadReckon(0.5, 0.5));
+				addSequential(new DriveDistanceMaintainHeader(30 , -0.65 , 10));
+				addSequential(new TurnToAngle(65 , 0.5));
+				addSequential(new AutoTimeDelay(0.25));
+				addParallel(new LiftDeadReckon(1.0 , -0.75));
+				addParallel(new AutoIntakeCube(3.75));
+				addSequential(new DriveDistanceMaintainHeader(60 , 0.55 , 5) , 4);
 				//Intake
-				addSequential(new DriveDistanceMaintainHeader(45 , -0.65 , 10));
-				addSequential(new TurnToAngle(-80 , -0.5));
-				addSequential(new DriveDistanceMaintainHeader(35 , 0.65 , 10));
+				addSequential(new DriveDistanceMaintainHeader(32 , -0.65 , 10));
+				addParallel(new LiftDeadReckon(1.25 , 0.75));
+				addSequential(new TurnToAngle(-63 , -0.5));
+				addSequential(new DriveDistanceMaintainHeader(35 , 0.7 , 3) , 3);
+				addSequential(new PlaceCube(1.0));
 			}
 			else
 			{
 				System.out.println("Single Cube Left");
 				
-				addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
+				addSequential(new CenterAuto_LeftDrive());
+				
+				/*addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
 				addSequential(new TurnToAngle(-15 , -0.5));
 				addSequential(new DriveDistanceMaintainHeader(87 , 0.65 , 10));
 				addSequential(new TurnToAngle(20 , 0.5));
-				addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 10));
+				addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 3) , 2);
+				addSequential(new PlaceCube(1.0));*/
 				
 			}
 			break;
@@ -65,28 +78,40 @@ public class AUTO_CenterPosition extends CommandGroup {
 			{	
 				System.out.println("2 Cube");
 				
-				addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
+				
+				/*addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
 				addSequential(new TurnToAngle(15 , 0.5));
 				addSequential(new DriveDistanceMaintainHeader(90 , 0.65 , 10));
 				addSequential(new TurnToAngle(-25 , -0.5));
-				addSequential(new DriveDistanceMaintainHeader(15 , 0.65 , 10));
-				//addSequential(new PlaceCube() , 0.5);
-				addSequential(new DriveDistanceMaintainHeader(22 , -0.65 , 10));
-				addSequential(new TurnToAngle(-80 , -0.5));
-				addSequential(new DriveDistanceMaintainHeader(55 , 0.65 , 10));
+				addSequential(new DriveDistanceMaintainHeader(15 , 0.65 , 10) , 2);
+				addSequential(new PlaceCube(1.0));*/
+				
+				addSequential(new CenterAuto_RightDrive());
+				addParallel(new LiftDeadReckon(0.5, 0.5));
+				addSequential(new DriveDistanceMaintainHeader(30 , -0.65 , 10));
+				addSequential(new TurnToAngle(-65 , -0.5));
+				addSequential(new AutoTimeDelay(0.25));
+				addParallel(new LiftDeadReckon(1.0 , -0.75));
+				addParallel(new AutoIntakeCube(3.75));
+				addSequential(new DriveDistanceMaintainHeader(60 , 0.55 , 5) , 4);
 				//Intake
-				addSequential(new DriveDistanceMaintainHeader(45 , -0.65 , 10));
-				addSequential(new TurnToAngle(80 , 0.5));
-				addSequential(new DriveDistanceMaintainHeader(35 , 0.65 , 10));
+				addSequential(new DriveDistanceMaintainHeader(32 , -0.65 , 10));
+				addParallel(new LiftDeadReckon(1.25 , 0.75));
+				addSequential(new TurnToAngle(63 , 0.5));
+				addSequential(new DriveDistanceMaintainHeader(35 , 0.7 , 3) , 3);
+				addSequential(new PlaceCube(1.0));
 			}
 			else
 			{
+				addSequential(new CenterAuto_RightDrive());
 				
-				addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
+				/*addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
 				addSequential(new TurnToAngle(15 , 0.5));
 				addSequential(new DriveDistanceMaintainHeader(90 , 0.65 , 10));
 				addSequential(new TurnToAngle(-25 , -0.5));
-				addSequential(new DriveDistanceMaintainHeader(15 , 0.65 , 10));
+				addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 10) , 2);
+				addSequential(new PlaceCube(1.0));*/
+				
 				
 			}
 			break;

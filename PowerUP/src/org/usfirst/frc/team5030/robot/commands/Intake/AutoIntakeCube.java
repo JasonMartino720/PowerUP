@@ -7,45 +7,31 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class IntakeCube extends Command {
+public class AutoIntakeCube extends Command {
 
-    public IntakeCube() {
+    public AutoIntakeCube(double Time) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.intakeSubsytem);
+        setTimeout(Time);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Robot.intakeSubsytem.OpenPistons();
-    	
+    	Robot.intakeSubsytem.ClampCube();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.intakeSubsytem.IntakeIn();
-    	
-    	if(Robot.oi.operatorLT.get())
-    	{
-    		Robot.intakeSubsytem.OpenPistons();
-    	}
-    	else if(Robot.oi.operatorRT.get())
-    	{
-    		Robot.intakeSubsytem.ClampCube();
-    	}
-    	else
-    	{
-    		
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.oi.IntakeIn.get();
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	//Robot.intakeSubsytem.ClampCube();
     	Robot.intakeSubsytem.IntakeStop();
     }
 

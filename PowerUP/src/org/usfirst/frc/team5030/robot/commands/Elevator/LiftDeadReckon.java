@@ -4,10 +4,10 @@ import org.usfirst.frc.team5030.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LiftDeadRockon extends Command {
+public class LiftDeadReckon extends Command {
 	
 	double power;
-	public LiftDeadRockon(double time, double power) {
+	public LiftDeadReckon(double time, double power) {
 		setTimeout(time);
 		this.power = power;
 	}

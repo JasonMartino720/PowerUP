@@ -1,5 +1,8 @@
 package org.usfirst.frc.team5030.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSource;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,8 +15,6 @@ import org.usfirst.frc.team5030.robot.commands.*;
 import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_CenterPosition;
 import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_LeftPosition;
 import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_RightPosition;
-import org.usfirst.frc.team5030.robot.commands.Groups.BangBangTurnSwitchLEFT;
-import org.usfirst.frc.team5030.robot.commands.Groups.BangBangTurnSwitchRIGHT;
 import org.usfirst.frc.team5030.robot.subsystems.*;
  
 
@@ -71,6 +72,10 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Cross?" , CrossCheckbox);
 		SmartDashboard.putData("Two Cube???" , TwoCube);
 		
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setFPS(20);
+		camera.setResolution(486, 440);
+
 		Robot.drivetrainSubsystem.EncReset();
 		Robot.drivetrainSubsystem.configIMU();
 		Robot.drivetrainSubsystem.ConifgMagEncoder();
