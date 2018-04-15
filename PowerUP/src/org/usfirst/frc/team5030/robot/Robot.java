@@ -17,7 +17,7 @@ import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_LeftPosition;
 import org.usfirst.frc.team5030.robot.commands.Groups.AUTO_RightPosition;
 import org.usfirst.frc.team5030.robot.subsystems.*;
  
-
+ 
 public class Robot extends TimedRobot {
 	
 	public static double kEncoderConversion = ((6*Math.PI) / 4100);

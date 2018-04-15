@@ -4,6 +4,7 @@ import org.usfirst.frc.team5030.robot.AutoDriveDistance;
 import org.usfirst.frc.team5030.robot.AutoTimeDelay;
 import org.usfirst.frc.team5030.robot.DriveDistanceMaintainHeader;
 import org.usfirst.frc.team5030.robot.Robot;
+import org.usfirst.frc.team5030.robot.SplineDrive;
 import org.usfirst.frc.team5030.robot.TimedTurn;
 import org.usfirst.frc.team5030.robot.TurnToAngle;
 import org.usfirst.frc.team5030.robot.commands.AUTO_CrossLine;
@@ -11,7 +12,7 @@ import org.usfirst.frc.team5030.robot.commands.Elevator.LiftDeadReckon;
 import org.usfirst.frc.team5030.robot.commands.Intake.AutoIntakeCube;
 import org.usfirst.frc.team5030.robot.commands.Intake.PlaceCube;
 
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Timer; 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -34,13 +35,7 @@ public class AUTO_CenterPosition extends CommandGroup {
 			{	
 				System.out.println("2 Cube");
 				
-				/*addParallel(new LiftDeadReckon(0.5, 0.5));
-				addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
-				addSequential(new TurnToAngle(-20 , -0.5));
-				addSequential(new DriveDistanceMaintainHeader(90 , 0.65 , 10));
-				addSequential(new TurnToAngle(20 , 0.5));
-				addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 3) , 2);
-				addSequential(new PlaceCube(1.0));*/
+				
 				addSequential(new CenterAuto_LeftDrive());
 				addParallel(new LiftDeadReckon(0.5, 0.5));
 				addSequential(new DriveDistanceMaintainHeader(30 , -0.65 , 10));
@@ -62,12 +57,7 @@ public class AUTO_CenterPosition extends CommandGroup {
 				
 				addSequential(new CenterAuto_LeftDrive());
 				
-				/*addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
-				addSequential(new TurnToAngle(-15 , -0.5));
-				addSequential(new DriveDistanceMaintainHeader(87 , 0.65 , 10));
-				addSequential(new TurnToAngle(20 , 0.5));
-				addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 3) , 2);
-				addSequential(new PlaceCube(1.0));*/
+				
 				
 			}
 			break;
@@ -78,13 +68,6 @@ public class AUTO_CenterPosition extends CommandGroup {
 			{	
 				System.out.println("2 Cube");
 				
-				
-				/*addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
-				addSequential(new TurnToAngle(15 , 0.5));
-				addSequential(new DriveDistanceMaintainHeader(90 , 0.65 , 10));
-				addSequential(new TurnToAngle(-25 , -0.5));
-				addSequential(new DriveDistanceMaintainHeader(15 , 0.65 , 10) , 2);
-				addSequential(new PlaceCube(1.0));*/
 				
 				addSequential(new CenterAuto_RightDrive());
 				addParallel(new LiftDeadReckon(0.5, 0.5));
@@ -103,14 +86,9 @@ public class AUTO_CenterPosition extends CommandGroup {
 			}
 			else
 			{
-				addSequential(new CenterAuto_RightDrive());
+				//addSequential(new CenterAuto_RightDrive());
 				
-				/*addSequential(new DriveDistanceMaintainHeader(20 , 0.65 , 10));
-				addSequential(new TurnToAngle(15 , 0.5));
-				addSequential(new DriveDistanceMaintainHeader(90 , 0.65 , 10));
-				addSequential(new TurnToAngle(-25 , -0.5));
-				addSequential(new DriveDistanceMaintainHeader(25 , 0.65 , 10) , 2);
-				addSequential(new PlaceCube(1.0));*/
+				addSequential(new SplineDrive(69, 45, 'L'));
 				
 				
 			}
