@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5030.robot.commands.Groups;
 
 import org.usfirst.frc.team5030.robot.DriveDistanceMaintainHeader;
+import org.usfirst.frc.team5030.robot.SplineDrive;
 import org.usfirst.frc.team5030.robot.TurnToAngle;
 import org.usfirst.frc.team5030.robot.commands.Elevator.LiftDeadReckon;
 import org.usfirst.frc.team5030.robot.commands.Intake.PlaceCube;
@@ -14,6 +15,8 @@ public class CenterAuto_LeftDrive extends CommandGroup {
 
     public CenterAuto_LeftDrive() {
         
+    	//IF YOU NEED TO REVERT UNCOMMENT THIS STUFF AND COMMENT OUT WHATS ACTIVE
+    	/*
     	addSequential(new DriveDistanceMaintainHeader(15 , 0.60 , 10));
 		addSequential(new TurnToAngle(-18 , -0.55));
 		addSequential(new DriveDistanceMaintainHeader(85 , 0.65 , 10));
@@ -21,5 +24,12 @@ public class CenterAuto_LeftDrive extends CommandGroup {
 		addSequential(new DriveDistanceMaintainHeader(30 , 0.65 , 3) , 1.25);
 		addSequential(new LiftDeadReckon(0.75, 0.75));
 		addSequential(new PlaceCube(0.5));
+		*/
+    	
+    	addSequential(new SplineDrive(70, 45, 'L'));
+    	//addParallel(new LiftDeadReckon(0.75, 0.75));
+    	addSequential(new SplineDrive(87, 42, 'R'));
+    	addSequential(new PlaceCube(0.5));
+		
     }
 }

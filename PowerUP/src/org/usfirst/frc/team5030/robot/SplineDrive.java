@@ -24,11 +24,12 @@ public class SplineDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     	Robot.drivetrainSubsystem.EncReset();
-    	Robot.drivetrainSubsystem.configIMU();
+    	//Robot.drivetrainSubsystem.configIMU();
     	
     	startAngle = Robot.drivetrainSubsystem.getGyroAngle();
-		
+    	
     	if(direction == 'L' || direction == 'l')
     	{
     		isLeft = true;
@@ -46,11 +47,13 @@ public class SplineDrive extends Command {
     	}
     	
     	
+    	//stopAngle = startAngle + stopAngle; 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
+    	   	
     	currentAngle = Robot.drivetrainSubsystem.getGyroAngle();
     	angleDifference = Math.abs(stopAngle - currentAngle);
     	
@@ -60,31 +63,31 @@ public class SplineDrive extends Command {
     	if(isLeft)
     	{
     		//Decide Multiplier based on remaining value
-    		 if(angleDifference > 25){
-          		 rotation = -0.575;
-          	 }else if (angleDifference > 5 && angleDifference <= 35){
-          		 rotation = -0.45;
-          	 }else{
-          		 rotation = 0;
-          	 }	
+    		if(angleDifference > 25 && angleDifference < 200){
+    			rotation = -0.55;
+         	}else if (angleDifference > 5 && angleDifference <= 25){
+         		rotation = -0.35;
+         	}else{
+         		rotation = 0;
+         	}		
+	   			
+	   		
+	   		if(remainingDistance > 20){ 
+	   			 throttle = 0.75; 
+	   	    }else if(remainingDistance < 20 && remainingDistance > 10){ 
+	   	    	throttle = 0.575; 
+	   	    }else {
+	   	    	throttle = 0; 
+	   	    }
     		
-    		if(remainingDistance > 20){ 
-    			throttle = 0.75; 
-    		}else if(remainingDistance < 20 && remainingDistance > 5){ 
-    			throttle = 0.45; 
-    		}else {
-    			 
-    			throttle = 0; 
-    		}
-    		
-    		System.out.println("Left");
+    		//System.out.println("Left");
     	}
     	else if(!isLeft)
     	{
     		//Decide Multiplier based on remaining value
-    		 if(angleDifference > 25){
-          		 rotation = 0.575;
-          	 }else if (angleDifference > 5 && angleDifference <= 35){
+    		 if(angleDifference > 25 && angleDifference < 200){
+          		 rotation = 0.55;
+          	 }else if (angleDifference > 5 && angleDifference <= 25){
           		 rotation = 0.35;
           	 }else{
           		 rotation = 0;
@@ -92,23 +95,23 @@ public class SplineDrive extends Command {
     			
     		
     		if(remainingDistance > 20){ 
-    			 throttle = 0.7; 
-    	    }else if(remainingDistance < 20 && remainingDistance > 5){ 
-    	    	throttle = 0.45; 
+    			 throttle = 0.75; 
+    	    }else if(remainingDistance < 20 && remainingDistance > 10){ 
+    	    	throttle = 0.5; 
     	    }else {
     	    	throttle = 0; 
     	    }
-    		
-    		System.out.println("R");
+    		 
+    		System.out.println("Right ");
     	}
     	else
     	{
     		terminate = true;
     	}
    
-    		System.out.println("Throttle " + throttle); 
-    		System.out.println("Rotatio " + rotation);
-    		System.out.println("Angle Difference " + angleDifference);
+    		System.out.println("StartAngle " + startAngle);
+    		System.out.println("StopAngle " + stopAngle);
+    		System.out.println("Angle Dif" + angleDifference);
     		Robot.drivetrainSubsystem.ArcadeDrive(throttle, rotation);
     }
 
@@ -121,7 +124,14 @@ public class SplineDrive extends Command {
         }
         else
     	{
-        	return angleDifference < 5;
+        	if(isLeft)
+        	{
+        		return (((Robot.robotmap.FR.getSelectedSensorPosition(0) * Robot.kEncoderConversion) > targetDistance - 10));
+        	}
+        	else
+        	{
+        		return (((Robot.robotmap.FL.getSelectedSensorPosition(0) * Robot.kEncoderConversion) > targetDistance - 10));
+        	}
     	}
     }
 
