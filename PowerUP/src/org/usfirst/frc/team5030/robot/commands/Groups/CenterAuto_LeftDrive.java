@@ -27,7 +27,7 @@ public class CenterAuto_LeftDrive extends CommandGroup {
 		*/
     	
     	addSequential(new SplineDrive(70, 45, 'L'));
-    	//addParallel(new LiftDeadReckon(0.75, 0.75));
+    	addParallel(new LiftDeadReckon(0.75, 0.75));
     	addSequential(new SplineDrive(87, 42, 'R'));
     	addSequential(new PlaceCube(0.5));
 		

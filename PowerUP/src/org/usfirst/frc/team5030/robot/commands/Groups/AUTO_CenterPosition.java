@@ -37,17 +37,16 @@ public class AUTO_CenterPosition extends CommandGroup {
 				
 				
 				addSequential(new CenterAuto_LeftDrive());
-				addParallel(new LiftDeadReckon(0.5, 0.5));
-				addSequential(new DriveDistanceMaintainHeader(30 , -0.65 , 10));
-				addSequential(new TurnToAngle(65 , 0.5));
+				addSequential(new DriveDistanceMaintainHeader(32 , -0.65 , 10));
+				addSequential(new TurnToAngle(32 , 0.65));
 				addSequential(new AutoTimeDelay(0.25));
 				addParallel(new LiftDeadReckon(1.0 , -0.75));
-				addParallel(new AutoIntakeCube(3.75));
-				addSequential(new DriveDistanceMaintainHeader(60 , 0.55 , 5) , 4);
+				addParallel(new AutoIntakeCube(3.5));
+				addSequential(new DriveDistanceMaintainHeader(50 , 0.55 , 3.75) , 3.75);
 				//Intake
-				addSequential(new DriveDistanceMaintainHeader(32 , -0.65 , 10));
+				addSequential(new DriveDistanceMaintainHeader(40 , -0.65 , 10));
 				addParallel(new LiftDeadReckon(1.25 , 0.75));
-				addSequential(new TurnToAngle(-63 , -0.5));
+				addSequential(new TurnToAngle(-55 , -0.5));
 				addSequential(new DriveDistanceMaintainHeader(35 , 0.7 , 3) , 3);
 				addSequential(new PlaceCube(1.0));
 			}
@@ -69,16 +68,16 @@ public class AUTO_CenterPosition extends CommandGroup {
 				
 				addSequential(new CenterAuto_RightDrive()); //DO NOT TOUCH
 				
-				addSequential(new DriveDistanceMaintainHeader(35 , -0.65 , 10));
-				addSequential(new TurnToAngle(-47 , -0.65));
+				addSequential(new DriveDistanceMaintainHeader(37 , -0.65 , 10));
+				addSequential(new TurnToAngle(-33 , -0.65));
 				addSequential(new AutoTimeDelay(0.25));
 				addParallel(new LiftDeadReckon(1.0 , -0.75));
 				addParallel(new AutoIntakeCube(4.25));
-				addSequential(new DriveDistanceMaintainHeader(75 , 0.55 , 5));
+				addSequential(new DriveDistanceMaintainHeader(60 , 0.55 , 4));
 				//Intake
-				addSequential(new DriveDistanceMaintainHeader(45 , -0.65 , 10));
+				addSequential(new DriveDistanceMaintainHeader(40 , -0.65 , 10));
 				addParallel(new LiftDeadReckon(1.25 , 0.75));
-				addSequential(new TurnToAngle(65 , 0.5));
+				addSequential(new TurnToAngle(55 , 0.5));
 				addSequential(new DriveDistanceMaintainHeader(35 , 0.7 , 3) , 3);
 				addSequential(new PlaceCube(1.0));
 			}
